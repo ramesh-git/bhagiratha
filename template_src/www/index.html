@@ -28,42 +28,47 @@
             * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
                 * Enable inline JS: add 'unsafe-inline' to default-src
         -->
-        
+
         <meta name="format-detection" content="telephone=no">
         <meta name="msapplication-tap-highlight" content="no">
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
         <link rel="stylesheet" type="text/css" href="css/index.css">
-        <title>Hello World</title>
+        <link rel="stylesheet" type="text/css" href="./css/boot.css"/>
+        <link href="fonts/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="./css/style.css"/>
+        <link rel="stylesheet" type="text/css" href="./css/login.css"/>
+        <link href="./css/navbar-fixed-top.css" rel="stylesheet">
+        <title>Mission Bhagiratha</title>
     </head>
     <body>
-        <div class="app">
-            <h1>Apache Cordova</h1>
-            <div id="login_form">
-        <table>
-            <tr>
-                <td class="f1_label">User Name :</td><td><input type="text" name="username" id="username" value="" />
-                </td>
-            </tr>
-            <tr>
-                <td class="f1_label">Password  :</td><td><input type="password" name="password" id="password" value=""  />
-                </td>
-            </tr>
-            <tr>
-                <td>
-                   <button class="btn waves-effect waves-light " type="button" name="submit" id="submit">Submit
-                    
-                </button>
-                </td>
-            </tr>
-        </table>
-</div>
-        <div id="log">Log:
-        </div>
-        </div>
+        <div class="container">
+          <div class="row ">
+        <div class="col-md-offset-5 col-md-5">
+            <div class="form-login">
+                <img class="img-circle" id="img_logo" src="img/Mission_bhagiratha_logo.png">
+            <h4>Welcome back.</h4>
+            <input type="text" id="username" class="form-control input-sm chat-input" placeholder="username" />
+            </br>
+            <input type="password" id="password" class="form-control input-sm chat-input" placeholder="password" />
+            </br>
+            <div class="wrapper">
+            <!--<div class="group-btn">-->     
+            <button type="button" class="btn btn-primary btn-md" id="submit" name="submit">login </button>
+            <!--</div>-->
+            </div>
+            </div>
+        
+        </div>     
+       
+         </div>
+     
+            <div id="log">Log:
+            </div>
+         </div>
         <script type="text/javascript" src="cordova.js"></script>
         <script src="js/jquery.min.js"></script>
-		<script type="text/javascript" src="js/appIndex.js"></script>
-		<script type="text/javascript" src="js/jquery.md5.js"></script>
+        <script type="text/javascript" src="js/appIndex.js"></script>
+        <script type="text/javascript" src="js/jquery.md5.js"></script>
 
     </body>
 </html>
