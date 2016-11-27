@@ -1193,7 +1193,10 @@ $('#submit_details').click(function (){
 });
 
 var x = document.getElementById("demo");
-
+if (navigator.geolocation) {
+	
+	navigator.geolocation.getCurrentPosition(showPosition);
+}
 function getLocation() {
     if($('#latitude').val() != null && $('#longitude').val() != null){
         console.log("get locatn lat"+$('#latitude').val());
