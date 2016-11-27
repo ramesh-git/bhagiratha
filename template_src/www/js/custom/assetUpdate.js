@@ -1193,8 +1193,9 @@ $('#submit_details').click(function (){
 });
 
 var x = document.getElementById("demo");
+$('#console').append("in js");
 if (navigator.geolocation) {
-	
+	$('#console').append("in location");
 	navigator.geolocation.getCurrentPosition(showPosition);
 }
 function getLocation() {
@@ -1220,6 +1221,7 @@ function getLocation() {
 }
 
 function showPosition(position) {
+$('#console').append("in show position");
     $('#latitude').val(position.coords.latitude);
     $('#longitude').val(position.coords.longitude);
 }
