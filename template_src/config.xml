@@ -27,6 +27,8 @@
     </author>
     <content src="index.html" />
 	
+	<preference name="permissions" value="none"/>
+	
     <feature name="http://api.phonegap.com/1.0/geolocation"/>
     <!-- Whitelist configuration. Refer to https://cordova.apache.org/docs/en/edge/guide_appdev_whitelist_index.md.html -->
     <plugin name="cordova-plugin-whitelist" spec="1" />
