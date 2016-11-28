@@ -1194,10 +1194,15 @@ $('#submit_details').click(function (){
 
 var x = document.getElementById("demo");
 $('#console').append("in js");
-if (navigator.geolocation) {
-	$('#console').append("in location");
-	navigator.geolocation.getCurrentPosition(onSuccess, onError);
-}
+document.addEventListener("deviceready", onDeviceReady, false);
+    function onDeviceReady() {
+        $('#console').append("navigator.geolocation works well");
+		if (navigator.geolocation) {
+			$('#console').append("in location");
+			navigator.geolocation.getCurrentPosition(onSuccess, onError);
+		}
+
+    }
 function getLocation() {
     if($('#latitude').val() != null && $('#longitude').val() != null){
         console.log("get locatn lat"+$('#latitude').val());
