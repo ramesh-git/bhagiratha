@@ -21,10 +21,10 @@ $(document).ready(function () {
  $('#login').click(function (event) {
 	
 //$("#log").append("<br/>in submit");
-    var strVal = $('#password').val();
+    var strVal = $('#userPassword').val();
     var strMD5 = $.md5(strVal);
 	//$("#log").append(strMD5+"<br/>")
-	var urll = masterServiceBaseURL+'GetDirectLogin?emplgid='+$('#username').val()+ "&emplgkey=" + strMD5;
+	var urll = masterServiceBaseURL+'GetDirectLogin?emplgid='+$('#userName').val()+ "&emplgkey=" + strMD5;
 	//$("#log").append(urll+"<br/>")
 
     $.ajax({
