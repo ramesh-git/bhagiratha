@@ -42,7 +42,7 @@
         <aside id="sidebar" class="sidebar sidebar-default sidebar-fixed-left" role="navigation">
             <div class="bgimg" >
             <img src="img/Mission_bhagiratha_logo.png" class="img-responsive left-logo" />           
-            Structures
+            User: User Name 
             </div>
             <ul class="nav sidebar-nav">
 
@@ -73,17 +73,31 @@
 
 
                 <!-- Nav tabs --><div class="card">
-                    <ul class="nav nav-tabs" role="tablist">
-                        <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Select Asset</a></li>
+			<h4 style="text-align:center">Asset Progress Entry Form</h4>
+<!--                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Asset Progress Entry Form</a></li>
                         <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Details</a></li>
                         <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Progress</a></li>
                         <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Remarks</a></li>
-                    </ul>
+                    </ul>-->
 
                     <!-- Tab panes -->
                     <div class="tab-content">
-                        <div role="tabpanel" class="tab-pane active home1" id="home">
-                            <div class="form-group">
+                        <div role="tabpanel" class="tab-pane active home1 row" id="home">
+                            
+                            <div id="accordion" role="tablist" aria-multiselectable="true">
+  
+  <div class="card">
+    <div class="card-header" role="tab" id="headingTwo">
+      <h4 class="mb-0">
+        <a class="collapsed" id="assetSelection" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+          Asset Location Selection 
+        </a>
+      </h4>
+    </div>
+    <div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo">
+      <div class="card-block">
+         <div class="form-group">
                                 <label for="exampleSelect1">Select District</label>
                                 <select class="form-control col-sm-1" id="district">
                                     <option value="" disabled selected>Choose your district</option>
@@ -124,7 +138,6 @@
                                     <option value="" disabled selected>Choose your Habitation</option>
                                 </select>
                             </div>
-                            
                             <div class="form-group">
                                 <label for="exampleSelect1">Select Segment</label>
                                 <select class="form-control col-sm-1" id="segment">
@@ -154,17 +167,51 @@
                                 <!--<label class="required">Select Asset Type</label>-->
                             </div>
                             <input class="btn btn-default center-block search_asset" type="submit" value="Submit" name="search" id="search_asset">
-                        </div>
-
-                        <div role="tabpanel" class="tab-pane " id="profile">
-                            <div class="assets_list">
+      </div>
+    </div>
+  </div>
+ 
+</div>
+                            
+                                                        
+                            <div id="accordion " role="tablist" aria-multiselectable="true">
+  
+  <div class="card hide assetlistacc">
+    <div class="card-header" role="tab" id="headingThree">
+      <h4 class="mb-0">
+        <a class="collapsed " id="assetbasedonSelection" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+          Assets list based on selected location
+        </a>
+      </h4>
+    </div>
+    <div id="collapseThree" class="collapse" role="tabpanel" aria-labelledby="headingThree">
+      <div class="card-block">
+         <div class="assets_list">
                                 
                             </div>
                             
-                            <div class="form-group">
+                            
+      </div>
+    </div>
+  </div>
+ 
+</div>
+                                                        <div id="accordion" role="tablist" aria-multiselectable="true">
+  
+  <div class="card hide basicdet">
+    <div class="card-header" role="tab" id="headingfive10">
+      <h4 class="mb-0">
+        <a class="collapsed" id="basicdetails" data-toggle="collapse" data-parent="#accordion" href="#collapsefive10" aria-expanded="false" aria-controls="collapsefive">
+          Structure Basic Details
+        </a>
+      </h4>
+    </div>
+    <div id="collapsefive10" class="collapse" role="tabpanel" aria-labelledby="headingfive10">
+      <div class="card-block">
+<!--         <div class="form-group">
                                 <label for="disabledTextInput">Location</label>
                                 <input class="form-control" type="text" id="location" placeholder="Location" readonly>
-                            </div>
+                            </div>-->
                             
                             <div class="form-group">
                                 <label for="disabledTextInput">Agreement Number</label>
@@ -185,7 +232,7 @@
                                 <label for="disabledTextInput">Contract Amount(In lakhs)</label>
                                 <input class="form-control" id="contractAmt" type="text" placeholder="Contract Amount(In lakhs)" readonly>
                             </div>
-                           
+                            
                             <div class="form-group">
                                 <label for="disabledTextInput">Target Date</label>
                                 <input class="form-control" type="text" id="targetdate"  placeholder="Target Date" readonly>
@@ -201,63 +248,237 @@
                             </div>
                             
                             <input class="btn btn-default center-block" type="submit" value="proceed" name="search" id="proceed">
+                            
+                            
+      </div>
+    </div>
+  </div>
+ 
+</div>
+                            
+                                                                                    <div id="accordion" role="tablist" aria-multiselectable="true">
+  
+  <div class="card hide basicdet">
+    <div class="card-header" role="tab" id="headingfive12">
+      <h4 class="mb-0">
+        <a class="collapsed" id="basicparamsdetails" data-toggle="collapse" data-parent="#accordion" href="#collapsefive12" aria-expanded="false" aria-controls="collapsefive">
+          Structure Parameters 
+        </a>
+      </h4>
+    </div>
+    <div id="collapsefive12" class="collapse" role="tabpanel" aria-labelledby="headingfive12">
+      <div class="card-block">
+<div class="work">
+                            <div class="intakeparams hide">
+                                <div class="form-group">
+                                <label for="disabledTextInput">Circle Height</label>
+                                <input class="form-control" id="circleht" type="text" placeholder="Height in Mt" readonly>
+                                </div>
+                                <br>
+                                
+                                <div class="form-group">
+                                <label for="disabledTextInput">Circle Dia</label>
+                                <input class="form-control" id="circledia" type="text" placeholder="Dia in Mt" readonly>
+                                </div>
+                                
+                                
+                                <br>
+                                
+                                <div class="form-group">
+                                <label for="disabledTextInput">Length</label>
+                                <input class="form-control" id="lt" type="text" placeholder="Length in Mt" readonly>
+                                </div>
+                                
+                                <br>
+                                
+                                <div class="form-group">
+                                <label for="disabledTextInput">Breadth</label>
+                                <input class="form-control" id="breadth" type="text" placeholder="Breadth in Mt" readonly>
+                                </div>
+                                <br>
+                                
+                                <div class="form-group">
+                                <label for="disabledTextInput">Height</label>
+                                <input class="form-control" id="ht" type="text" placeholder="Height in Mt" readonly>
+                                </div>
+                            </div>
+                            
+                            <div class="wtpparams hide">
+                                <div class="form-group">
+                                <label for="disabledTextInput">Capcity</label>
+                                <input class="form-control" id="wtpcapacity" type="text" placeholder="Capcity in MLD" readonly>
+                                </div>
+                                
+                                
+                            </div>
+
+                            
+                            <div class="sumpparams hide">
+                                <div class="form-group">
+                                <label for="disabledTextInput">Circle Height</label>
+                                <input class="form-control" id="sumpcircleht" type="text" placeholder="Height in Mt" readonly>
+                                </div>
+                                
+                                <div class="form-group">
+                                <label for="disabledTextInput">Circle Dia</label>
+                                <input class="form-control" id="sumpcircledia" type="text" placeholder="Dia in Mt" readonly>
+                                </div>
+                                
+                                <div class="form-group">
+                                <label for="disabledTextInput">Length</label>
+                                <input class="form-control" id="sumplt" type="text" placeholder="Length in Mt" readonly>
+                                </div>
+                                
+                                <div class="form-group">
+                                <label for="disabledTextInput">Breadth</label>
+                                <input class="form-control" id="sumpbreadth" type="text" placeholder="Breadth in Mt" readonly>
+                                </div>
+                                
+                                <div class="form-group">
+                                <label for="disabledTextInput">Height</label>
+                                <input class="form-control" id="sumpht" type="text" placeholder="Height in Mt" readonly>
+                                </div>
+<!--                                
+                                <br>
+                                <div class="form-group">
+                                <label for="disabledTextInput">Capacity</label>
+                                <input class="form-control" id="sumpcapacity" type="text" placeholder="Capacity in KL" readonly>
+                                </div>-->
+                                
+                            </div>
+
+                            <div class="ohbrparams hide">
+                                <div class="form-group">
+                                <label for="disabledTextInput">Staging</label>
+                                <input class="form-control" id="staging" type="text" placeholder="Staging in Mt" readonly>
+                                </div>
+                                
+                                <br>
+                                <div class="form-group">
+                                <label for="disabledTextInput">Capacity</label>
+                                <input class="form-control" id="ohbrcapacity" type="text" placeholder="Capacity in KL" readonly>
+                                </div>
+                                
+                                
+                            </div>
+
+
+                            <div class="fpbparams hide">
+                                
+                                <div class="form-group">
+                                <label for="disabledTextInput">Length</label>
+                                <input class="form-control" id="phlt" type="text" placeholder="Length in Mt" readonly>
+                                </div>
+                                
+                                <br>
+                                
+                                <div class="form-group">
+                                <label for="disabledTextInput">Breadth</label>
+                                <input class="form-control" id="phbt" type="text" placeholder="Breadth in Mt" readonly>
+                                </div>
+                                <br>
+                                
+                                <div class="form-group">
+                                <label for="disabledTextInput">Height</label>
+                                <input class="form-control" id="phht" type="text" placeholder="Height in Mt" readonly>
+                                </div>
+                            </div>
+    
+                            <div class="pumpsparams hide">
+                                
+                                <div class="form-group">
+                                <label for="disabledTextInput">Type of pump</label>
+                                <input class="form-control" id="pumptype" type="text" placeholder="pump type" readonly>
+                                </div>
+                                
+                                <br>
+                                
+                                <div class="form-group">
+                                <label for="disabledTextInput">Capacity</label>
+                                <input class="form-control" id="pumpcapacity" type="text" placeholder="Capacity" readonly>
+                                </div>
+                                <br>
+                            </div>
+   
                         </div>
-                        
-                        
-                        
-                        <div role="tabpanel" class="tab-pane messages1" id="messages">
-                            <div class="form-group row ipcompPerclass">
+                            
+                            <input class="btn btn-default center-block" type="submit" value="proceed" name="search" id="proceedparams">
+                            
+                            
+      </div>
+    </div>
+  </div>
+ 
+</div>
+                            
+                                                                    
+    <div id="accordion" role="tablist" aria-multiselectable="true">
+  
+  <div class="card hide phyprogclass">
+    <div class="card-header" role="tab" id="headingfour">
+      <h4 class="mb-0">
+        <a class="collapsed" id="physicalprogress" data-toggle="collapse" data-parent="#accordion" href="#collapsefour" aria-expanded="false" aria-controls="collapsefour">
+          Enter asset physical progress
+        </a>
+      </h4>
+    </div>
+    <div id="collapsefour" class="collapse" role="tabpanel" aria-labelledby="headingfour">
+      <div class="card-block">
+         <div class="form-group row ipcompPerclass">
                                 <label for="example-number-input" class="col-xs-4 col-form-label">Completed %</label>
                                 <div class="col-xs-8">
                                     <input class="form-control" type="number" id="ipcompPer" value="" >
                                 </div>
                             </div> 
-                            <div class="form-group compAsset hide row">
-                                <label for="disabledTextInput" class="col-xs-4 col-form-label">Completed %</label>
-                                <div class="col-xs-8">
-                                    <input class="form-control" type="text" placeholder="Completed %" id="compPerip" readonly >
-                                </div>
-                                <!--<label for="disabledTextInput">Completed %</label>-->
-                                <!--<input class="form-control" type="text" id="compPerip" placeholder="Completed %" readonly>-->
-                            </div>
                             <div class="form-group row hide ipcommisionedDate">
                                 <label for="example-date-input" class="col-xs-4 col-form-label">Commissioned Date</label>
                                 <div class="col-xs-8">
                                     <input class="form-control" type="date" value="" id="ipcommisionedDate">
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label class="col-xs-4 col-form-label" for="exampleInputAmount">Amount Paid</label>
-                                <div class="input-group">
-                                    <div class="input-group-addon">Rs</div>
-                                    <input type="text" class="form-control" id="ipamountPaid" placeholder="Amount">
-                                    <div class="input-group-addon">.00</div>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="example-date-input" class="col-xs-4 col-form-label">Paid Date</label>
-                                <div class="col-xs-8">
-                                    <input class="form-control" type="date" value="" id="ippaidDate">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="example-text-input" class="col-xs-4 col-form-label">M-Book No</label>
-                                <div class="col-xs-8">
-                                    <input class="form-control" type="text" id="ipmbook"  placeholder="Artisanal kale" id="example-text-input">
-                                </div>
-                            </div>
                             
-                            <table class="table table-bordered">
-                                <thead>
-                                <h2><b>Asset Work Description</b></h2>
-                                </thead>
-                                
-                            </table>
                             
-                            <div class="assets_info hide center-block">
+                            <form class="form-inline">
+                                <div class="form-group latitude">
+                                    <input type="text" class="form-control" id="latitude" placeholder="Latitude" readonly>
+                                </div>
+                                <div class="form-group longitude">
+                                    <input type="text" class="form-control" id="longitude" placeholder="Longitude" readonly>
+                                </div>
+                                <button  type="button" id="gps" onclick="getLocation()" style="align-items: center" class="btn btn-primary"><i class="fa fa-map-marker hide" style="font-size:28px;color:red"></i></button>
+                                <!--<button type="button" id="img" style="align-items: center" class="btn btn-primary"><i class="fa fa-camera" style="font-size:28px;color:black"></i></button>-->
+<!--                                <span class="btn btn-default btn-file">
+                                    <i class="fa fa-camera" style="font-size:28px;color:black"></i>Image <input  type="file" id="assetImage" accept="image/*" name="assetImage" capture="camera" data-filetype=".png,.gif,.jpeg,.jpg,.JPEG,.JPG" data-filesize="5" >
+                                    <input type="hidden" id="assetImageData" name="assetImageData">
+                                </span>-->
+<!--<button onclick="capturePhotoWithData();">Capture Photo</button> <br>-->
+                                <button id="assetImage" onclick="capturePhotoWithData(this);">Capture Photo</button> <br>
+                            </form>
+                           
+                            <div class="form-group row hide">
+                                <label for="example-text-input" class="col-xs-2 col-form-label">Remarks</label>
+                                <div class="col-xs-10">
+                                    <input class="form-control" type="text" id="remarks" placeholder="Enter remarks here" id="example-text-input">
+                                </div>
+                            </div>  
+
+                            <div id="accordion " role="tablist" aria-multiselectable="true">
+  
+  <div class="card assetworkdet">
+    <div class="card-header" role="tab" id="headingThree8">
+      <h4 class="mb-0">
+        <a class="collapsed " id="assetworkdetails" data-toggle="collapse" data-parent="#accordion" href="#collapseThree8" aria-expanded="false" aria-controls="collapseThree">
+          Work Details
+        </a>
+      </h4>
+    </div>
+    <div id="collapseThree8" class="collapse" role="tabpanel" aria-labelledby="headingThree8">
+      <div class="card-block">
+         <div class="assets_info hide center-block">
                                 <h1>Structure completed</h1>
                             </div>
-                        <div class="work">
+                            
+                                                    <div class="work">
                             <div class="intake hide">
                                 <div class="form-group">
                                 <label for="intake">PFL Stage</label>
@@ -787,43 +1008,70 @@
                                 </select>
                                 </div>
                                 
-                                <div class="col-xs-14">
-                                    <input class="form-control" type="text" id="fbFinishingStage_remarks" placeholder="Remarks on work status" id="example-text-input">
+                                <div class="col-xs-14 ">
+                                    <input class="form-control " type="text" id="fbFinishingStage_remarks" placeholder="Remarks on work status" id="example-text-input">
                                 </div>
                                 
                                 
                             </div>
                         </div>
-                            <input class="btn btn-default center-block" type="submit" value="proceed" name="search" id="work_sub">
-                                </div>
                             
                             
-                        <!--</div>-->
-                        <div role="tabpanel" class="tab-pane settings1" id="settings">
-                            <form class="form-inline">
-                                <div class="form-group latitude">
-                                    <input type="text" class="form-control" id="latitude" placeholder="Latitude" readonly>
+      </div>
+    </div>
+  </div>
+ 
+                            </div>
+<input class="btn btn-default center-block" type="submit" value="proceed" name="search" id="proceedphy">
+      </div>
+    </div>
+  </div>
+ 
+</div>                
+                                                                               
+                            <div id="accordion" role="tablist" aria-multiselectable="true">
+  
+  <div class="card hide finprogclass">
+    <div class="card-header" role="tab" id="headingfive">
+      <h4 class="mb-0">
+        <a class="collapsed" id="financialprogress" data-toggle="collapse" data-parent="#accordion" href="#collapsefive" aria-expanded="false" aria-controls="collapsefive">
+          Enter asset Financial progress
+        </a>
+      </h4>
+    </div>
+    <div id="collapsefive" class="collapse" role="tabpanel" aria-labelledby="headingfive">
+      <div class="card-block">
+         <div class="form-group">
+                                <label class="col-xs-4 col-form-label" for="exampleInputAmount">Amount Paid</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">Rs</div>
+                                    <input type="text" class="form-control" id="ipamountPaid" placeholder="Amount">
+                                    <div class="input-group-addon">.00</div>
                                 </div>
-                                <div class="form-group longitude">
-                                    <input type="text" class="form-control" id="longitude" placeholder="Longitude" readonly>
-                                </div>
-								<div id="console"></div>
-                                <button  type="button" id="gps" onclick="getLocation()" style="align-items: center" class="btn btn-primary" value="Get Location"><i class="fa fa-map-marker hide" style="font-size:28px;color:red"></i></button>
-                                <!--<button type="button" id="img" style="align-items: center" class="btn btn-primary"><i class="fa fa-camera" style="font-size:28px;color:black"></i></button>-->
-                                <span class="btn btn-default btn-file">
-                                    <i class="fa fa-camera" style="font-size:28px;color:black"></i>Image <input type="file" id="assetImage">
-                                    <input type="hidden" id="assetImageData" name="assetImageData">
-                                </span>
-                            </form>
-                           
+                            </div>
                             <div class="form-group row">
-                                <label for="example-text-input" class="col-xs-2 col-form-label">Remarks</label>
-                                <div class="col-xs-10">
-                                    <input class="form-control" type="text" id="remarks" placeholder="Enter remarks here" id="example-text-input">
+                                <label for="example-date-input" class="col-xs-4 col-form-label">Paid Date</label>
+                                <div class="col-xs-8">
+                                    <input class="form-control" type="date" value="" id="ippaidDate">
                                 </div>
-                            </div>  
-                            <input class="btn btn-default center-block" type="submit" value="Update" name="search" id="submit_details">
+                            </div>
+                            <div class="form-group row">
+                                <label for="example-text-input" class="col-xs-4 col-form-label">M-Book No</label>
+                                <div class="col-xs-8">
+                                    <input class="form-control" type="text" id="ipmbook"  placeholder="Mbook No" id="example-text-input">
+                                </div>
+                            </div>
+                            
+                            
+      </div>
+    </div>
+  </div>
+ 
+</div>                   
+                     <input class="btn btn-default center-block hide submitdetails" type="submit" value="Update" name="search" id="submit_details">  
+                     
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -834,6 +1082,7 @@
     <script src="./js/custom.js"></script> 
     <script src="./js/bootstrap.min.js"></script>
     <script src="./js/custom/common.js"></script>
+    <script src="./js/custom/camera.js"></script>
     <script src="./js/custom/assetUpdate.js"></script>
     
 </body>

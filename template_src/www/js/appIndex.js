@@ -29,11 +29,9 @@ $("#log").append("<br/>in submit");
                 
             if (data == "success") {
                 $("#log").append('login success'+"<br/>");
-				window.location = "home.html";
             }
             else{
                 $("#log").append("Invalid combination"+"<br/>");
-				window.location = "index.html";
             }
 
         },

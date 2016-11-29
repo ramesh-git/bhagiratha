@@ -18,16 +18,16 @@
       <!--Pulling Awesome Font -->
 <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
    </head>
-   <body>
+   <body style="background-image: url('img/login-bg.png');background-size:cover;background-repeat:no-repeat;">
       <div class="container">
           <div class="row ">
         <div class="col-md-offset-5 col-md-5">
             <div class="form-login">
                 <img class="img-circle" id="img_logo" src="img/Mission_bhagiratha_logo.png">
-            <h4>Welcome back.</h4>
+            <h4>Mission Bhagiratha</h4>
             <input type="text" id="userName" class="form-control input-sm chat-input" placeholder="username" />
             </br>
-            <input type="text" id="userPassword" class="form-control input-sm chat-input" placeholder="password" />
+            <input type="password" id="userPassword" class="form-control input-sm chat-input" placeholder="password" />
             </br>
             <div class="wrapper">
             <!--<div class="group-btn">-->     
@@ -41,7 +41,10 @@
          </div>
       </div>
      
+      <script type="text/javascript" src="cordova.js"></script>
       <script src="./js/jquery.min.js"></script> 
+      <script type="text/javascript" src="js/appIndex.js"></script>
+      <script type="text/javascript" src="js/jquery.md5.js"></script>
       <script src="./js/custom.js"></script> 
       <script src="./js/bootstrap.min.js"></script>
       <script src="./js/custom/login.js"></script>

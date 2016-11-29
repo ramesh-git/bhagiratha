@@ -3,9 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-var mobileServiceBaseURL = "/tdwsp/mobileServiceClient/";
 
-if(document.getElementById('assetImage')) document.getElementById('assetImage').addEventListener('change', handleFileSelect, false);
+
 
 var assetTypes = new Array();
 assetTypes[1] = "Intake Structure";
@@ -19,7 +18,6 @@ assetTypes[8] = "GLSR";
 assetTypes[9] = "Pump House";
 assetTypes[10] = "Footpath Bridge";
 assetTypes[11] = "Pumps";
-
 
 
 
@@ -54,8 +52,6 @@ $('#constituency').on('change', function (e) {
     $('#village').val('');
     $('#habitation').find('option:gt(0)').remove();
     $('#habitation').val('');
-//    $('#segment').find('option:gt(0)').remove();
-//    $('#segment').val('');
     $('#asset_type').val('');
     loadMasters('mandal', mobileServiceBaseURL + "GetMandals/" + $('#district').val() + "/" + $('#constituency').val());
 });
@@ -68,8 +64,6 @@ $('#mandal').on('change', function (e) {
     $('#village').val('');
     $('#habitation').find('option:gt(0)').remove();
     $('#habitation').val('');
-//    $('#segment').find('option:gt(0)').remove();
-//    $('#segment').val('');
     $('#asset_type').val('');
     loadMasters('panchayat', mobileServiceBaseURL + "GetPanchayats/" + $('#district').val() + "/" + $('#constituency').val() + "/" + $('#mandal').val());
 });
@@ -80,8 +74,6 @@ $('#panchayat').on('change', function (e) {
     $('#village').val('');
     $('#habitation').find('option:gt(0)').remove();
     $('#habitation').val('');
-//    $('#segment').find('option:gt(0)').remove();
-//    $('#segment').val('');
     $('#asset_type').val('');
     loadMasters('village', mobileServiceBaseURL + "GetVillages/" + $('#district').val() + "/" + $('#constituency').val() + "/" + $('#mandal').val() + "/" + $('#panchayat').val());
 });
@@ -90,8 +82,6 @@ $('#village').on('change', function (e) {
     
     $('#habitation').find('option:gt(0)').remove();
     $('#habitation').val('');
-//    $('#segment').find('option:gt(0)').remove();
-//    $('#segment').val('');
     $('#asset_type').val('');
     loadMasters('habitation', mobileServiceBaseURL + "GetHabs/" + $('#district').val() + "/" + $('#constituency').val() + "/" + $('#mandal').val() + "/" + $('#panchayat').val() + "/" + $('#village').val());
 });
@@ -100,13 +90,15 @@ $('#village').on('change', function (e) {
 
 
 $('#search_asset').click(function (){
-    $('.search_asset').addClass('hide');
-    $('.nav-tabs a[href="#profile"]').tab('show');
+
+    $('#assetSelection').trigger("click");
+    $('.assetlistacc').removeClass('hide');
+    $('#assetbasedonSelection').trigger("click");
     
     $.ajax({
             method: "GET",
-           
-            url: mobileServiceBaseURL + "GetAssets/" + $('#habitation').val() + "/" + $('#asset_type').val() + "/" + $('#segment').val() + "/",
+            url: mobileServiceBaseURL + "GetAssets/" + $('#habitation').val() + "/" + $('#segment').val() + "/",
+//            url: mobileServiceBaseURL + "GetAssets/" + $('#habitation').val() + "/" + $('#asset_type').val() + "/" + $('#segment').val() + "/",
             success: function (data) {
                 
                 if (data.length > 0) {
@@ -114,6 +106,7 @@ $('#search_asset').click(function (){
                     $('.assets_list').removeClass('hide');
                 } else {
                     alert("No Assets found");
+                    $('.assetlistacc').addClass('hide');
                 }
             },
             failure: function (error) {
@@ -126,140 +119,19 @@ $('#search_asset').click(function (){
 function prepareAssetList(data) {
     var html = '';
     var table = '<table class="responsive-table striped dynamic_table">';
-    var thead = '<thead> <tr><th data-field="id" class="center hide" style="width: 45%">Asset Code</th>';
+    var thead = '<thead> <tr><th data-field="id" class="center" style="width: 45%">Asset Code</th>';
+    thead += '<th data-field="id" class="center hide" style="width: 45%">Asset Type</th>';
     thead += '<th data-field="id" class="center" style="width: 45%">Structure</th>';
     var tbody = '<tbody>';
-    if ($('#asset_type').val() == "01") {
-        $('.intake').removeClass('hide');
-        thead += '<th data-field="name" class="center">Circle Dia</th>';
-        thead += '<th data-field="name" class="center">Circle Height</th>';
-        thead += '<th data-field="name" class="center">Rectangle Length</th>';
-        thead += '<th data-field="name" class="center">Rectangle Breadth</th>';
-        thead += '<th data-field="name" class="center">Rectangle Height</th>';
-    }
-    if ($('#asset_type').val() == "02") {
-        $('.wtp').removeClass('hide');
-        thead += '<th data-field="name" class="center">Capacity</th>';
-    }
-    if ($('#asset_type').val() == "03") {
-        $('.sump').removeClass('hide');
-        thead += '<th data-field="name" class="center">Sump Dia</th>';
-        thead += '<th data-field="name" class="center">Sump Height</th>';
-        thead += '<th data-field="name" class="center">Sump Length</th>';
-        thead += '<th data-field="name" class="center">Sump Breadth</th>';
-        thead += '<th data-field="name" class="center">Sump Height</th>';
-    }
-    if ($('#asset_type').val() == "04" || $('#asset_type').val() == "05" || $('#asset_type').val() == "06" || $('#asset_type').val() == "07" || $('#asset_type').val() == "08") {
-        thead += '<th data-field="name" class="center">Capacity</th>';
-        thead += '<th data-field="name" class="center">Staging</th>';
-        $('.ohbr').removeClass('hide');
-        
-    }
-    if ($('#asset_type').val() == "10") {
-        $('.fpb').removeClass('hide');
-        thead += '<th data-field="name" class="center">Length</th>';
-        thead += '<th data-field="name" class="center">Width</th>';
-        thead += '<th data-field="name" class="center">Height</th>';
-    }
-    if ($('#asset_type').val() == "11") {
-        $('.fpb').removeClass('hide');
-        thead += '<th data-field="name" class="center">TYPE</th>';
-        thead += '<th data-field="name" class="center">Make</th>';
-        thead += '<th data-field="name" class="center">No.of Pumps</th>';
-        thead += '<th data-field="name" class="center">Discharge</th>';
-        thead += '<th data-field="name" class="center">Design</th>';
-    }
-    if ($('#asset_type').val() == "14") {
-        $('.fpb').removeClass('hide');
-        thead += '<th data-field="name" class="center">Length</th>';
-        thead += '<th data-field="name" class="center">Width</th>';
-        thead += '<th data-field="name" class="center">Height</th>';
-    }
-    if ($('#asset_type').val() == "15") {
-        $('.fpb').removeClass('hide');
-        thead += '<th data-field="name" class="center">Length</th>';
-        thead += '<th data-field="name" class="center">Width</th>';
-        thead += '<th data-field="name" class="center">Height</th>';
-    }
+    thead += '<th data-field="name" class="center">Location</th>';
     $.each(data, function (key, obj) {
 //        console.log(obj);
         tbody += '<tr>';
-        tbody += ' <td class="center hide">' + obj.asset_code + '</td>';
+        tbody += ' <td class="center">' + obj.asset_code + '</td>';
+        tbody += ' <td class="center hide">' + obj.assetType + '</td>';
         tbody += ' <td class="center">' + assetTypes[parseInt(obj.assetType)]+ '</td>';
-        if ($('#asset_type').val() == "01") {
-            tbody += '<td class="center">' + (obj.intake_dia != undefined ? obj.intake_dia : '-') + '</td>';
-            tbody += '<td class="center">' + (obj.intake_height != undefined ? obj.intake_height : '-') + '</td>';
-            tbody += '<td class="center">' + (obj.intake_length != undefined ? obj.intake_length : '-') + '</td>';
-            tbody += '<td class="center">' + (obj.intake_breadth != undefined ? obj.intake_breadth : '-') + '</td>';
-            tbody += '<td class="center">' + (obj.intake_rect_height != undefined ? obj.intake_rect_height : '-') + '</td>';
+        tbody += ' <td class="center">' + obj.location + '</td>';
 
-        }
-        if ($('#asset_type').val() == "02") {
-            tbody += '<td class="center">' + (obj.wtp_capacity != undefined ? obj.wtp_capacity : '-') + '</td>';
-        }
-        if ($('#asset_type').val() == "03") {
-            tbody += '<td class="center">' + (obj.sump_dia != undefined ? obj.sump_dia : '-') + '</td>';
-            tbody += '<td class="center">' + (obj.sump_height != undefined ? obj.sump_height : '-') + '</td>';
-            tbody += '<td class="center">' + (obj.sump_length != undefined ? obj.sump_length : '-') + '</td>';
-            tbody += '<td class="center">' + (obj.sump_breadth != undefined ? obj.sump_breadth : '-') + '</td>';
-            tbody += '<td class="center">' + (obj.sump_rect_height != undefined ? obj.sump_rect_height : '-') + '</td>';
-
-        }
-        if ($('#asset_type').val() == "04") {
-            tbody += '<td class="center">' + (obj.ohbr_capacity != undefined ? obj.ohbr_capacity : '-') + '</td>';
-            tbody += '<td class="center">' + (obj.ohbr_staging != undefined ? obj.ohbr_staging : '-') + '</td>';
-
-        }
-        if ($('#asset_type').val() == "05") {
-            tbody += '<td class="center">' + (obj.bpt_capacity != undefined ? obj.bpt_capacity : '-') + '</td>';
-            tbody += '<td class="center">' + (obj.bpt_staging != undefined ? obj.bpt_staging : '-') + '</td>';
-
-        }
-        if ($('#asset_type').val() == "06") {
-            tbody += '<td class="center">' + (obj.glbr_capacity != undefined ? obj.glbr_capacity : '-') + '</td>';
-            tbody += '<td class="center">' + (obj.glbr_staging != undefined ? obj.glbr_staging : '-') + '</td>';
-
-        }
-        if ($('#asset_type').val() == "07") {
-            tbody += '<td class="center">' + (obj.ohsr_capacity != undefined ? obj.ohsr_capacity : '-') + '</td>';
-            tbody += '<td class="center">' + (obj.ohsr_staging != undefined ? obj.ohsr_staging : '-') + '</td>';
-
-        }
-        if ($('#asset_type').val() == "08") {
-            tbody += '<td class="center">' + (obj.glsr_capacity != undefined ? obj.glsr_capacity : '-') + '</td>';
-            tbody += '<td class="center">' + (obj.glsr_staging != undefined ? obj.glsr_staging : '-') + '</td>';
-
-        }
-        if ($('#asset_type').val() == "09") {
-            tbody += '<td class="center">' + (obj.pumphouse_dia != undefined ? obj.pumphouse_dia : '-') + '</td>';
-            tbody += '<td class="center">' + (obj.pumphouse_height != undefined ? obj.pumphouse_height : '-') + '</td>';
-            tbody += '<td class="center">' + (obj.pumphouse_length != undefined ? obj.pumphouse_length : '-') + '</td>';
-            tbody += '<td class="center">' + (obj.pumphouse_breadth != undefined ? obj.pumphouse_breadth : '-') + '</td>';
-            tbody += '<td class="center">' + (obj.pumphouse_rect_height != undefined ? obj.pumphouse_rect_height : '-') + '</td>';
-
-        }
-        if ($('#asset_type').val() == "10") {
-            tbody += '<td class="center">' + (obj.fpb_width != undefined ? obj.fpb_width : '-') + '</td>';
-            tbody += '<td class="center">' + (obj.fpb_length != undefined ? obj.fpb_length : '-') + '</td>';
-            tbody += '<td class="center">' + (obj.fpb_height != undefined ? obj.fpb_height : '-') + '</td>';
-        }
-        if ($('#asset_type').val() == "11") {
-            tbody += '<td class="center">' + (obj.pump_type != undefined ? obj.pump_type : '-') + '</td>';
-            tbody += '<td class="center">' + (obj.pump_make != undefined ? obj.pump_make : '-') + '</td>';
-            tbody += '<td class="center">' + (obj.pump_count != undefined ? obj.pump_count : '-') + '</td>';
-            tbody += '<td class="center">' + (obj.pump_discharge != undefined ? obj.pump_discharge : '-') + '</td>';
-            tbody += '<td class="center">' + (obj.pump_design != undefined ? obj.pump_design : '-') + '</td>';
-        }
-        if ($('#asset_type').val() == "14") {
-            tbody += '<td class="center">' + (obj.thrust_width != undefined ? obj.thrust_width : '-') + '</td>';
-            tbody += '<td class="center">' + (obj.thrust_length != undefined ? obj.thrust_length : '-') + '</td>';
-            tbody += '<td class="center">' + (obj.thrust_height != undefined ? obj.thrust_height : '-') + '</td>';
-        }
-        if ($('#asset_type').val() == "15") {
-            tbody += '<td class="center">' + (obj.valvechamber_width != undefined ? obj.valvechamber_width : '-') + '</td>';
-            tbody += '<td class="center">' + (obj.valvechamber_length != undefined ? obj.valvechamber_length : '-') + '</td>';
-            tbody += '<td class="center">' + (obj.valvechamber_height != undefined ? obj.valvechamber_height : '-') + '</td>';
-        }
         tbody += '</tr>';
     });
 
@@ -288,7 +160,259 @@ function fetchAssetDetails(url) {
             console.log(data);
             console.log("data[0]"+JSON.stringify(data[0]));
             assetCompPer = 0;
+            
             $('#submit_update').removeAttr('disabled');
+            $('#assetbasedonSelection').trigger("click"); 
+            $('.basicdet').removeClass('hide');
+            $('#basicdetails').trigger("click"); 
+            
+            if(data[0].assetType == "01" ){
+                $('.intake').removeClass('hide');
+                $('.intakeparams').removeClass('hide');
+                
+                $('#breadth').val(data[1].intake_breadth);
+                $('#breadth').next().css({
+                'top': '-0.3rem',
+                'font-size': '0.8rem'
+            });
+            $('#circleht').val(data[1].intake_height);
+                $('#circleht').next().css({
+                'top': '-0.3rem',
+                'font-size': '0.8rem'
+            });
+            $('#circledia').val(data[1].intake_dia);
+                $('#circledia').next().css({
+                'top': '-0.3rem',
+                'font-size': '0.8rem'
+            });
+            $('#lt').val(data[1].intake_length);
+                $('#lt').next().css({
+                'top': '-0.3rem',
+                'font-size': '0.8rem'
+            });
+            $('#ht').val(data[1].intake_rect_height);
+                $('#ht').next().css({
+                'top': '-0.3rem',
+                'font-size': '0.8rem'
+            });
+            }
+            if(data[0].assetType == "02"){
+                $('.wtp').removeClass('hide');
+                $('.wtpparams').removeClass('hide');
+                $('#wtpcapacity').val(data[1].wtp_capacity);
+                $('#wtpcapacity').next().css({
+                'top': '-0.3rem',
+                'font-size': '0.8rem'
+            });
+            }
+            if(data[0].assetType == "03"){
+                $('.sump').removeClass('hide');
+                $('.sumpparams').removeClass('hide');
+                                
+                $('#sumpcircleht').val(data[1].sump_height);
+                $('#sumpcircleht').next().css({
+                'top': '-0.3rem',
+                'font-size': '0.8rem'
+            });
+            $('#sumpcircledia').val(data[1].sump_dia);
+                $('#sumpcircledia').next().css({
+                'top': '-0.3rem',
+                'font-size': '0.8rem'
+            });
+            $('#sumplt').val(data[1].sump_length);
+                $('#sumplt').next().css({
+                'top': '-0.3rem',
+                'font-size': '0.8rem'
+            });
+            $('#sumpbreadth').val(data[1].sump_breadth);
+                $('#sumpbreadth').next().css({
+                'top': '-0.3rem',
+                'font-size': '0.8rem'
+            });
+            $('#sumpht').val(data[1].sump_rect_height);
+                $('#sumpht').next().css({
+                'top': '-0.3rem',
+                'font-size': '0.8rem'
+            });
+
+            
+            }
+            if(data[0].assetType == "04" || data[0].assetType == "05" || data[0].assetType == "06" || data[0].assetType == "07" || data[0].assetType == "08"  ){
+                $('.ohbr').removeClass('hide');
+                $('.ohbrparams').removeClass('hide');
+                
+            }
+            if(data[0].assetType == "10"  ){
+                $('.fpb').removeClass('hide');
+                $('.fpbparams').removeClass('hide');
+                
+                $('#phlt').val(data[1].fpb_length);
+                $('#phlt').next().css({
+                'top': '-0.3rem',
+                'font-size': '0.8rem'
+                });
+                $('#phbt').val(data[1].fpb_width);
+                $('#phbt').next().css({
+                'top': '-0.3rem',
+                'font-size': '0.8rem'
+                });
+                $('#phht').val(data[1].fpb_height);
+                $('#phht').next().css({
+                'top': '-0.3rem',
+                'font-size': '0.8rem'
+                });
+            }
+            if(data[0].assetType == "11" ){
+                $('.fpb').removeClass('hide');
+                $('.pumpsparams').removeClass('hide');
+                $('#pumptype').val(data[1].pump_type);
+                $('#pumptype').next().css({
+                'top': '-0.3rem',
+                'font-size': '0.8rem'
+                });
+                $('#pumpcapacity').val(data[1].pump_capacity);
+                $('#pumpcapacity').next().css({
+                'top': '-0.3rem',
+                'font-size': '0.8rem'
+                });
+            }
+            if(data[0].assetType == "14" ){
+                $('.fpb').removeClass('hide');
+                $('.fpbparams').removeClass('hide');
+                
+                $('#phlt').val(data[1].thrust_length);
+                $('#phlt').next().css({
+                'top': '-0.3rem',
+                'font-size': '0.8rem'
+                });
+                $('#phbt').val(data[1].thrust_width);
+                $('#phbt').next().css({
+                'top': '-0.3rem',
+                'font-size': '0.8rem'
+                });
+                $('#phht').val(data[1].thrust_height);
+                $('#phht').next().css({
+                'top': '-0.3rem',
+                'font-size': '0.8rem'
+                });
+                
+            }
+            if(data[0].assetType == "15" ){
+                $('.fpb').removeClass('hide');
+                $('.fpbparams').removeClass('hide');
+                
+                 $('#phlt').val(data[1].valvechamber_length);
+                $('#phlt').next().css({
+                'top': '-0.3rem',
+                'font-size': '0.8rem'
+                });
+                $('#phbt').val(data[1].valvechamber_width);
+                $('#phbt').next().css({
+                'top': '-0.3rem',
+                'font-size': '0.8rem'
+                });
+                $('#phht').val(data[1].valvechamber_height);
+                $('#phht').next().css({
+                'top': '-0.3rem',
+                'font-size': '0.8rem'
+                });
+            }
+            
+            if(data[0].assetType == "04" ){
+                $('#staging').val(data[1].ohbr_staging);
+                $('#staging').next().css({
+                'top': '-0.3rem',
+                'font-size': '0.8rem'
+                });
+                $('#ohbrcapacity').val(data[1].ohbr_capacity);
+                $('#ohbrcapacity').next().css({
+                'top': '-0.3rem',
+                'font-size': '0.8rem'
+                });
+            }
+            
+            if(data[0].assetType == "05" ){
+                $('#staging').val(data[1].bpt_staging);
+                $('#staging').next().css({
+                'top': '-0.3rem',
+                'font-size': '0.8rem'
+                });
+                $('#ohbrcapacity').val(data[1].bpt_capacity);
+                $('#ohbrcapacity').next().css({
+                'top': '-0.3rem',
+                'font-size': '0.8rem'
+                });
+            }
+            
+            if(data[0].assetType == "06" ){
+                $('#staging').val(data[1].glbr_staging);
+                $('#staging').next().css({
+                'top': '-0.3rem',
+                'font-size': '0.8rem'
+                });
+                $('#ohbrcapacity').val(data[1].glbr_capacity);
+                $('#ohbrcapacity').next().css({
+                'top': '-0.3rem',
+                'font-size': '0.8rem'
+                });
+            }
+            
+            if(data[0].assetType == "07" ){
+                $('#staging').val(data[1].ohsr_staging);
+                $('#staging').next().css({
+                'top': '-0.3rem',
+                'font-size': '0.8rem'
+                });
+                $('#ohbrcapacity').val(data[1].ohsr_capacity);
+                $('#ohbrcapacity').next().css({
+                'top': '-0.3rem',
+                'font-size': '0.8rem'
+                });
+            }
+            
+            if(data[0].assetType == "08" ){
+                $('#staging').val(data[1].glsr_staging);
+                $('#staging').next().css({
+                'top': '-0.3rem',
+                'font-size': '0.8rem'
+                });
+                $('#ohbrcapacity').val(data[1].glsr_capacity);
+                $('#ohbrcapacity').next().css({
+                'top': '-0.3rem',
+                'font-size': '0.8rem'
+                });
+            }
+            
+            if(data[0].assetType == "09" ){
+                $('.intakeparams').removeClass('hide');
+                $('#circledia').val(data[1].pumphouse_dia);
+                $('#circledia').next().css({
+                'top': '-0.3rem',
+                'font-size': '0.8rem'
+            });
+            $('#circleht').val(data[1].pumphouse_height);
+                $('#circleht').next().css({
+                'top': '-0.3rem',
+                'font-size': '0.8rem'
+            });
+            $('#breadth').val(data[1].pumphouse_breadth);
+                $('#breadth').next().css({
+                'top': '-0.3rem',
+                'font-size': '0.8rem'
+            });
+            $('#lt').val(data[1].pumphouse_length);
+                $('#lt').next().css({
+                'top': '-0.3rem',
+                'font-size': '0.8rem'
+            });
+            $('#ht').val(data[1].pumphouse_rect_height);
+                $('#ht').next().css({
+                'top': '-0.3rem',
+                'font-size': '0.8rem'
+            });
+            
+            }
+            
             $('#asset').val(data[0].assetType);
             $('#asset').next().css({
                 'top': '-0.3rem',
@@ -296,6 +420,18 @@ function fetchAssetDetails(url) {
             });
             $('#asset').trigger('change');
             console.log("latitude"+data[0].latitude);
+            
+            $('#latitude').val(data[0].latitude);
+                $('#latitude').next().css({
+                'top': '-0.3rem',
+                'font-size': '0.8rem'
+            });
+                $('#longitude').val(data[0].langtitude);
+                $('#longitude').next().css({
+                'top': '-0.3rem',
+                'font-size': '0.8rem'
+            });
+            
             
             $('#targetdate').val(data[0].target_date);
             $('#targetdate').next().css({
@@ -307,7 +443,6 @@ function fetchAssetDetails(url) {
                 'top': '-0.3rem',
                 'font-size': '0.8rem'
             });
-             console.log(" inside lat long cond");
             $('#amtPaid').val(data[3].amountPaid);
             $('#amtPaid').next().css({
                 'top': '-0.3rem',
@@ -329,16 +464,7 @@ function fetchAssetDetails(url) {
                 'font-size': '0.8rem'
             });
                
-                $('#latitude').val(data[0].latitude);
-                $('#latitude').next().css({
-                'top': '-0.3rem',
-                'font-size': '0.8rem'
-            });
-                $('#longitude').val(data[0].langtitude);
-                $('#longitude').next().css({
-                'top': '-0.3rem',
-                'font-size': '0.8rem'
-            });
+                
             
             $('.assets_info').removeClass('hide');
             $('.work').addClass('hide');
@@ -372,11 +498,7 @@ function fetchAssetDetails(url) {
                 'top': '-0.3rem',
                 'font-size': '0.8rem'
             });
-            $('#location').val(data[0].location);
-            $('#location').next().css({
-                'top': '-0.3rem',
-                'font-size': '0.8rem'
-            });
+
             
             $('#pflstage').val(data[2].pflstage.split("-")[0]);
             $('#pflstage').next().css({
@@ -706,13 +828,14 @@ function fetchAssetDetails(url) {
                 'font-size': '0.8rem'
             });
             
-            $('#ciSpecial').val(data[2].ciSpecial.split("-")[0]);
+            console.log("data[2].ciSpecial"+data[2].fixingCISpecials);
+            $('#ciSpecial').val(data[2].fixingCISpecials.split("-")[0]);
             $('#ciSpecial').next().css({
                 'top': '-0.3rem',
                 'font-size': '0.8rem'
             });
             
-            $('#ciSpecial_remarks').val(data[2].ciSpecial.split("-")[1]);
+            $('#ciSpecial_remarks').val(data[2].fixingCISpecials.split("-")[1]);
             $('#ciSpecial_remarks').next().css({
                 'top': '-0.3rem',
                 'font-size': '0.8rem'
@@ -785,12 +908,17 @@ function fetchAssetDetails(url) {
 }
 
 $('#proceed').click(function (){
-    $('.nav-tabs a[href="#messages"]').tab('show');
+    $('#basicdetails').trigger("click"); 
+    $('.phyprogclass').removeClass('hide');
+    $('.finprogclass').removeClass('hide');
+    $('.submitdetails').removeClass('hide');
+    
+});
+$('#proceedphy').click(function (){
+    $('#financialprogress').trigger("click"); 
+    $('#physicalprogress').trigger("click"); 
 });
 
-$('#work_sub').click(function (){
-    $('.nav-tabs a[href="#settings"]').tab('show');
-});
 
 $('#ipcompPer').on('change', function (e) {
     if($('#ipcompPer').val() == "100"){
@@ -800,8 +928,20 @@ $('#ipcompPer').on('change', function (e) {
     }
 });
 
+$('#proceedparams').click(function (){
+    $('#basicparamsdetails').trigger("click"); 
+});
 
 $('#submit_details').click(function (){
+    $('.alert').removeClass('hide');
+    console.log("image data"+$('#assetImageData').val());
+    console.log("image "+$('#assetImage').val());
+    if($('#assetImage').val() == null || $('#assetImage').val() == "" ){
+    alert("please select an image to proceed further");
+    $('#submit_details').removeClass('hide');
+}else{
+    if(document.getElementById('assetImage')) document.getElementById('assetImage').addEventListener('change', handleFileSelect, false);
+}
     var dataToSubmit = {};
 
     
@@ -812,9 +952,11 @@ $('#submit_details').click(function (){
         dataToSubmit.village = $('#village').val();
         dataToSubmit.habitation = $('#habitation').val();
         dataToSubmit.segment = $('#segment').val();
-        dataToSubmit.asset = $('#asset_type').val();
+//        dataToSubmit.asset = $('#asset_type').val();
+        dataToSubmit.asset = $('.dynamic_table > tbody > tr').children("td:nth-child(2)").text().trim()
         dataToSubmit.assetCode = $('.dynamic_table > tbody > tr').children('td:first').text();
-        
+        console.log("asset type"+$('.dynamic_table > tbody > tr').children("td:nth-child(2)").text().trim());
+
         dataToSubmit.ipcompPer = $('#ipcompPer').val();
         dataToSubmit.ipcommisionedDate = $('#ipcommisionedDate').val();
         dataToSubmit.ipamountPaid = $('#ipamountPaid').val();
@@ -1165,7 +1307,7 @@ $('#submit_details').click(function (){
         dataToSubmit.longitude = $('#longitude').val();
         dataToSubmit.assetImage = /([^\\]+)$/.exec($('#assetImage').val())[1];
         dataToSubmit.assetImageData = $('#assetImageData').val();
-        dataToSubmit.remarks = $('#remarks').val();
+//        dataToSubmit.remarks = $('#remarks').val();
         dataToSubmit.user_id = 'mobileadmin';
         
         console.log(JSON.stringify(dataToSubmit));
@@ -1181,6 +1323,7 @@ $('#submit_details').click(function (){
                 console.log("in if");
                 alert("Asset updated successfully");
                 $('#submit_details').removeAttr('disabled');
+                $('.nav-tabs a[href="#home"]').tab('show');
                 $('.sidebar-menu ul li.active a').trigger("click");
             } else if (response.status == "failure") {
                 console.log("in else");
@@ -1193,16 +1336,19 @@ $('#submit_details').click(function (){
 });
 
 var x = document.getElementById("demo");
-$('#console').append("in js");
-if (navigator.geolocation) {
-	$('#console').append("in location");
-	navigator.geolocation.getCurrentPosition(onSuccess, onError);
-}
+
 function getLocation() {
-    if($('#latitude').val() != null && $('#longitude').val() != null){
+    if($('#latitude').val() == null && $('#longitude').val() == null || $('#latitude').val() == "" && $('#longitude').val() == "" || $('#latitude').val() == "Not Available" && $('#longitude').val() == "Not Available"){
         console.log("get locatn lat"+$('#latitude').val());
         console.log("get locatn long"+$('#longitude').val());
-         var answer = confirm("GPS information Already Exists \n click OK to override GPS Details \n Cancel to retain previous GPS details");
+        if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition);
+            } else{
+                x.innerHTML = "Geolocation is not supported by this browser.";
+            }
+         
+    }else{
+            var answer = confirm("GPS information Already Exists \n click OK to override GPS Details \n Cancel to retain previous GPS details");
          if (answer) {
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(showPosition);
@@ -1210,22 +1356,12 @@ function getLocation() {
                 x.innerHTML = "Geolocation is not supported by this browser.";
             }
          }
-    }else{
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(showPosition);
-            } else{
-                x.innerHTML = "Geolocation is not supported by this browser.";
-            }
         }
     
 }
 
-function onSuccess(position) {
-$('#console').append("in show position");
+function showPosition(position) {
     $('#latitude').val(position.coords.latitude);
     $('#longitude').val(position.coords.longitude);
 }
-function onError(error) {
-        $('#console').append('code: '    + error.code    + '\n' +
-                'message: ' + error.message + '\n');
-    }
+

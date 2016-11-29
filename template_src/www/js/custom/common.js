@@ -1,13 +1,13 @@
+var mobileServiceBaseURL = "www.missionbhagiratha.telangana.gov.in/tdwsp/mobileServiceClient/";
+//var mobileServiceBaseURL = "/tdwsp/mobileServiceClient/";
+
 var consolReq = false;
 console_log = function(value) {
     if(consolReq){
         console.log(value);
     }
 }
-var mobileServiceBaseURL = "/tdwsp/mobileServiceClient/";
-var pipelineServiceBaseURL = "/tdwsp/pipelineServices/";
-var assetServiceBaseURL = "/tdwsp/assetServiceClient/";
-var masterServiceBaseURL = "/tdwsp/mastersServices/";
+
 
 t = new Date().getTime();
 
@@ -221,30 +221,7 @@ function process_output1(wb) {
     householdfileValue = to_json(wb).Sheet1;
 }
 
-function handleFileReadHouseHold(e) {
-    rABS = true;
-    use_worker = true;
-    var files = e.target.files;
-    var f = files[0];
-    {
-        var reader = new FileReader();
-        var name = f.name;
-        reader.onload = function (e) {
-            if (typeof console !== 'undefined')
-                console.log("onload", new Date(), rABS, use_worker);
-            var data = e.target.result;
-            if (use_worker) {
-//                console.log('ssssssssssssssssssssssss');
-                xw(data, process_output1);
 
-            }
-        };
-        if (rABS)
-            reader.readAsBinaryString(f);
-        else
-            reader.readAsArrayBuffer(f);
-    }
-}
 
 function handleFileRead(e) {
     rABS = true;
@@ -270,70 +247,6 @@ function handleFileRead(e) {
             reader.readAsArrayBuffer(f);
     }
 }
-function process_output_PipeLine(wb) {
-//    console.log("aaaaaaaaaaaaaaasssssssssssssssdddddddddddddd");
-    var output = output = JSON.stringify(to_json(wb), 3, 3);
-    document.getElementById('boqfileValues').value = JSON.stringify(to_json(wb).HydStmnt, 3, 3);
-    console.log(to_json(wb).BOQ);
-    boqfileValue = to_json(wb).HydStmnt;
-    valvefileValue = to_json(wb).Valves;
-    assetValue = to_json(wb).LinkedAssets;
-    prepareData();
-}
-function handleFileReadPipeLine(e) {
-    rABS = true;
-    use_worker = true;
-    var files = e.target.files;
-    var f = files[0];
-    {
-        var reader = new FileReader();
-        var name = f.name;
-        reader.onload = function (e) {
-            if (typeof console !== 'undefined')
-                console.log("onload", new Date(), rABS, use_worker);
-            var data = e.target.result;
-            if (use_worker) {
-//                console.log('ssssssssssssssssssssssss');
-                xw(data, process_output_PipeLine);
 
-            }
-        };
-        if (rABS)
-            reader.readAsBinaryString(f);
-        else
-            reader.readAsArrayBuffer(f);
-    }
-}
 
-function process_output_bulkasset(wb) {
-//    console.log("aaaaaaaaaaaaaaasssssssssssssssdddddddddddddd");
-    var output = output = JSON.stringify(to_json(wb), 3, 3);
-    existingAssetfileValues = to_json(wb).BulkAssets;
-}
-function handleFileReadBulk(e) {
-    $('#myModal .modal-title').html("File Uploading and reading Excel sheet. Please wait....");
-    $('#myModal').modal('show');
-    rABS = true;
-    use_worker = true;
-    var files = e.target.files;
-    var f = files[0];
 
-    {
-        var reader = new FileReader();
-        var name = f.name;
-        reader.onload = function (e) {
-            if (typeof console !== 'undefined')
-                console.log("onload", new Date(), rABS, use_worker);
-            var data = e.target.result;
-            if (use_worker) {
-//                console.log('ssssssssssssssssssssssss');
-                xw(data, process_output_bulkasset);
-
-            }
-        };
-        if (rABS)
-            reader.readAsBinaryString(f);
-        else
-            reader.readAsArrayBuffer(f);
-    }
-}
