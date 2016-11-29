@@ -14,18 +14,18 @@
 //    }
 //});
 
-$("#log").append("in js file");
+//$("#log").append("in js file");
 var masterServiceBaseURL = "http://missionbhagiratha.telangana.gov.in/tdwsp/mastersServices/";
 //var masterServiceBaseURL = "/tdwsp/mastersServices/";
 $(document).ready(function () {
  $('#login').click(function (event) {
 	
-$("#log").append("<br/>in submit");
+//$("#log").append("<br/>in submit");
     var strVal = $('#password').val();
     var strMD5 = $.md5(strVal);
-	$("#log").append(strMD5+"<br/>")
+	//$("#log").append(strMD5+"<br/>")
 	var urll = masterServiceBaseURL+'GetDirectLogin?emplgid='+$('#username').val()+ "&emplgkey=" + strMD5;
-	$("#log").append(urll+"<br/>")
+	//$("#log").append(urll+"<br/>")
 
     $.ajax({
        
@@ -36,14 +36,14 @@ $("#log").append("<br/>in submit");
 		console.log("1111111111");
 //            data = JSON.parse(data);
 		
-                $("#log").append(data+"<br/>");
+            //    $("#log").append(data+"<br/>");
                 
             if (data == "success") {
-                $("#log").append('login success'+"<br/>");
+              //  $("#log").append('login success'+"<br/>");
 				window.location = "home.html";
             }
             else{
-                $("#log").append("Invalid combination"+"<br/>");
+                //$("#log").append("Invalid combination"+"<br/>");
 				window.location = "index.html";
             }
 
@@ -51,7 +51,7 @@ $("#log").append("<br/>in submit");
         error: function (x, e)
         {
 		console.log("2222222");
-            $("#log").append(x.readyState + " " + x.status + " " + e.msg+"<br/>");
+            //$("#log").append(x.readyState + " " + x.status + " " + e.msg+"<br/>");
             
         }
 
