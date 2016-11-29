@@ -12,5 +12,19 @@
     "cordova:template"
   ],
   "author": "Apache Software Foundation",
-  "license": "Apache-2.0"
+  "license": "Apache-2.0",
+   "plugins": [
+    "org.apache.cordova.camera",
+    "org.apache.cordova.console",
+    "org.apache.cordova.contacts",
+    "org.apache.cordova.device",
+    "org.apache.cordova.dialogs",
+    "org.apache.cordova.file",
+    "org.apache.cordova.file-transfer",
+    "org.apache.cordova.geolocation",
+    "org.apache.cordova.inappbrowser",
+    "org.apache.cordova.media",
+    "org.apache.cordova.media-capture",
+    "org.apache.cordova.network-information"
+  ]
 }
