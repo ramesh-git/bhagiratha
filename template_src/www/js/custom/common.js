@@ -1,4 +1,4 @@
-var mobileServiceBaseURL = "http://missionbhagiratha.telangana.gov.in/tdwsp/mobileServiceClient/";
+var mobileServiceBaseURL = "http://missionbhagiratha.telangana.gov.in/tdwsp/mobileAppServices/";
 //var mobileServiceBaseURL = "/tdwsp/mobileServiceClient/";
 
 var consolReq = false;
