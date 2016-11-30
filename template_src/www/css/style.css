@@ -1619,3 +1619,20 @@ html {
     background : url('../img/menubd.png') no-repeat top ;
     
 }
+
+table, th, td {
+    border: 0px solid black;
+    border-collapse: collapse;
+}
+th, td {
+    padding: 5px;
+    height:200px;			
+    text-align: center;    
+}
+#img_logo {
+    max-height: 150px;
+    max-width: 150px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
