@@ -44,6 +44,7 @@ $(document).ready(function () {
             }
             else{
                 //$("#log").append("Invalid combination"+"<br/>");
+				alert("Invalid Credentials");
 				window.location = "index.html";
             }
 
