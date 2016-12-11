@@ -14,6 +14,96 @@
         <link href="fonts/font-awesome/css/font-awesome.min.css" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="./css/style.css"/>
         <link href="./css/navbar-fixed-top.css" rel="stylesheet">
+    <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+    <script type="text/javascript" charset="utf-8">
+
+    var pictureSource;   // picture source
+    var destinationType; // sets the format of returned value
+
+    // Wait for device API libraries to load
+    //
+    document.addEventListener("deviceready",onDeviceReady,false);
+
+    // device APIs are available
+    //
+    function onDeviceReady() {
+        pictureSource=navigator.camera.PictureSourceType;
+        destinationType=navigator.camera.DestinationType;
+    }
+
+    // Called when a photo is successfully retrieved
+    //
+    function onPhotoDataSuccess(imageData) {
+      // Uncomment to view the base64-encoded image data
+      // console.log(imageData);
+
+      // Get image handle
+      //
+      var smallImage = document.getElementById('smallImage');
+
+      // Unhide image elements
+      //
+      smallImage.style.display = 'block';
+
+      // Show the captured photo
+      // The in-line CSS rules are used to resize the image
+      //
+      smallImage.src = "data:image/jpeg;base64," + imageData;
+	  document.getElementById('assetImageData').value=imageData;
+    }
+
+    // Called when a photo is successfully retrieved
+    //
+    function onPhotoURISuccess(imageURI) {
+      // Uncomment to view the image file URI
+      // console.log(imageURI);
+
+      // Get image handle
+      //
+      var largeImage = document.getElementById('largeImage');
+
+      // Unhide image elements
+      //
+      largeImage.style.display = 'block';
+
+      // Show the captured photo
+      // The in-line CSS rules are used to resize the image
+      //
+      largeImage.src = imageURI;
+    }
+
+    // A button will call this function
+    //
+    function capturePhoto() {
+      // Take picture using device camera and retrieve image as base64-encoded string
+      navigator.camera.getPicture(onPhotoDataSuccess, onFail, { quality: 50,
+        destinationType: destinationType.DATA_URL });
+    }
+
+    // A button will call this function
+    //
+    function capturePhotoEdit() {
+      // Take picture using device camera, allow edit, and retrieve image as base64-encoded string
+      navigator.camera.getPicture(onPhotoDataSuccess, onFail, { quality: 20, allowEdit: true,
+        destinationType: destinationType.DATA_URL });
+    }
+
+    // A button will call this function
+    //
+    function getPhoto(source) {
+      // Retrieve image file location from specified source
+      navigator.camera.getPicture(onPhotoURISuccess, onFail, { quality: 50,
+        destinationType: destinationType.FILE_URI,
+        sourceType: source });
+    }
+
+    // Called if something bad happens.
+    //
+    function onFail(message) {
+      alert('Failed because: ' + message);
+    }
+
+    </script>
     </head>
     <body>
         <nav class="navbar navbar-default navbar-fixed-top navbar-md">
@@ -38,34 +128,22 @@
             </div>
         </nav>
         <div class="sidebar-overlay"></div>
-        
+
         <aside id="sidebar" class="sidebar sidebar-default sidebar-fixed-left" role="navigation">
             <div class="bgimg" >
-            <img src="img/Mission_bhagiratha_logo.png" class="img-responsive left-logo" />           
-            User: User Name 
+                <img src="img/Mission_bhagiratha_logo.png" class="img-responsive left-logo" />           
+                User: User Name 
             </div>
             <ul class="nav sidebar-nav">
 
                 <li class="divider"></li>
                 <li class="dropdown">
-                    <a class="ripple-effect dropdown-toggle" href="#" data-toggle="dropdown">
-                        <span class="glyphicon glyphicon-list-alt">
-                        </span>&nbsp; Structures<b class="caret"></b></a> 
-                    <ul class="dropdown-menu ac-act-dropdown-menu">
-                        <li><a href="./AssetUpdate.html" class="transition"><span class="glyphicon glyphicon-list-alt">Update</a></li>
-
-                    </ul>
+                    <a href="./AssetUpdate.html" class="transition assetupdate"><span class="glyphicon glyphicon-list-alt">Update</a>
                 </li>
                 <li class="dropdown">
-                    <a class="ripple-effect dropdown-toggle" href="#" data-toggle="dropdown">
-                        <span class="glyphicon glyphicon-list-alt">
-                        </span>&nbsp; Pipeline<b class="caret"></b></a> 
-                    <ul class="dropdown-menu ac-act-dropdown-menu">
-                        <li><a href="./PipelineUpdate.html" class="transition"><span class="glyphicon glyphicon-list-alt">Progress</a></li>
-
-                    </ul>
+                    <a href="./PipelineUpdate.html" class="transition pipelineupdate"><span class="glyphicon glyphicon-list-alt">Progress</a>
                 </li>
-                
+
             </ul>
         </aside>
         <div class="container">
@@ -73,1017 +151,1098 @@
 
 
                 <!-- Nav tabs --><div class="card">
-			<h4 style="text-align:center">Asset Progress Entry Form</h4>
-<!--                    <ul class="nav nav-tabs" role="tablist">
-                        <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Asset Progress Entry Form</a></li>
-                        <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Details</a></li>
-                        <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Progress</a></li>
-                        <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Remarks</a></li>
-                    </ul>-->
+                    <h4 style="text-align:center">Asset Progress Entry Form</h4>
+                    <!--                    <ul class="nav nav-tabs" role="tablist">
+                                            <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Asset Progress Entry Form</a></li>
+                                            <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Details</a></li>
+                                            <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Progress</a></li>
+                                            <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Remarks</a></li>
+                                        </ul>-->
 
                     <!-- Tab panes -->
                     <div class="tab-content">
                         <div role="tabpanel" class="tab-pane active home1 row" id="home">
-                            
-                            <div id="accordion" role="tablist" aria-multiselectable="true">
-  
-  <div class="card">
-    <div class="card-header" role="tab" id="headingTwo">
-      <h4 class="mb-0">
-        <a class="collapsed" id="assetSelection" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-          Asset Location Selection 
-        </a>
-      </h4>
-    </div>
-    <div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo">
-      <div class="card-block">
-         <div class="form-group">
-                                <label for="exampleSelect1">Select District</label>
-                                <select class="form-control col-sm-1" id="district">
-                                    <option value="" disabled selected>Choose your district</option>
-                                </select>
+                            <div class="card ">
+                                <div class="col s12 m4 row" style="text-align: center" >
+                                    <input name="assetin" type="radio" id="ulb" value="ulb"  /><label for="ulb">Urban</label>
+                                    <input name="assetin" type="radio" id="ulb1" value="ulb1"  /><label for="ulb1">Rural</label>
+                                    <!--<input name="assetin" type="radio" id="ulb2" value="nonulb" /><label for="nonulb">Panchayat</label>-->
+                                </div>
+
+                                <div id="nonulbdiv" role="tablist" class="hide" aria-multiselectable="true">
+
+                                    <div class="card ">
+                                        <div class="card-header" role="tab" id="headingTwo">
+                                            <h4 class="mb-0">
+                                                <a class="collapsed" id="assetSelection" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                                    Rural Asset Location Selection 
+                                                </a>
+                                            </h4>
+                                        </div>
+                                        <div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo">
+                                            <div class="card-block">
+                                                <div class="form-group">
+                                                    <label for="exampleSelect1">Select Circle</label>
+                                                    <select class="form-control col-sm-1" id="district">
+                                                        <option value="" disabled selected>Choose your Circle</option>
+                                                    </select>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="exampleSelect1">Select Constituency</label>
+                                                    <select class="form-control col-sm-1" id="constituency">
+                                                        <option value="" disabled selected>Choose your Constituency</option>
+                                                    </select>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="exampleSelect1">Select Mandal</label>
+                                                    <select class="form-control col-sm-1" id="mandal">
+                                                        <option value="" disabled selected>Choose your Mandal</option>
+                                                    </select>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="exampleSelect1">Select Panchayath</label>
+                                                    <select class="form-control col-sm-1" id="panchayat">
+                                                        <option value="" disabled selected>Choose your Panchayath</option>
+                                                    </select>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="exampleSelect1">Select Village</label>
+                                                    <select class="form-control col-sm-1" id="village">
+                                                        <option value="" disabled selected>Choose your Village</option>
+                                                    </select>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="exampleSelect1">Select Habitation</label>
+                                                    <select class="form-control col-sm-1" id="habitation">
+                                                        <option value="" disabled selected>Choose your Habitation</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="exampleSelect1">Select Segment</label>
+                                                    <select class="form-control col-sm-1" id="segment">
+                                                        <option value="" disabled selected>Choose your Segment</option>
+                                                    </select>
+                                                </div>
+
+
+                                                <div class="form-group">
+                                                    <label for="asset_type">Select Asset Type</label>
+                                                    <select class="form-control col-sm-1" id="asset_type">
+                                                        <option value="" disabled selected>Choose your Asset Type</option>
+                                                        <option value="01">Intake Structure</option>
+                                                        <option value="02">WTP</option>
+                                                        <option value="03">SUMP</option>
+                                                        <option value="04">OHBR</option>
+                                                        <option value="05">BPT</option>
+                                                        <option value="06">GLBR</option>
+                                                        <option value="07">OHSR</option>
+                                                        <option value="08">GLSR</option>
+                                                        <option value="09">Pump House</option>
+                                                        <option value="10">Footpath Bridge</option>
+                                                        <option value="11">Pumps</option>
+                                                        <option value="14">Thrust Blocks</option>
+                                                        <option value="15">Valve Chambers</option>
+                                                    </select>
+                                                    <!--<label class="required">Select Asset Type</label>-->
+                                                </div>
+                                                <input class="btn btn-default center-block search_asset" type="submit" value="Search" name="search" id="search_asset">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div id="ulbdiv" role="tablist" class="hide" aria-multiselectable="true">
+
+                                    <div class="card ">
+                                        <div class="card-header" role="tab" id="headingTwo99">
+                                            <h4 class="mb-0">
+                                                <a class="collapsed" id="assetSelectionulb" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo99" aria-expanded="false" aria-controls="collapseTwo">
+                                                    ULB Asset Location Selection
+                                                </a>
+                                            </h4>
+                                        </div>
+                                        <div id="collapseTwo99" class="collapse" role="tabpanel" aria-labelledby="headingTwo99">
+                                            <div class="card-block">
+                                                 <div class="form-group">
+                                                    <label for="exampleSelect1">Select Circle</label>
+                                                    <select class="form-control col-sm-1" id="district1">
+                                                        <option value="" disabled selected>Choose your Circle</option>
+                                                    </select>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="exampleSelect1">Select Constituency</label>
+                                                    <select class="form-control col-sm-1" id="constituency1">
+                                                        <option value="" disabled selected>Choose your Constituency</option>
+                                                    </select>
+                                                </div>
+                                                <div class="input-field col s12 m4">
+                                                    <label for="exampleSelect1">Select ULB</label>
+                                                    <select class="form-control col-sm-1" id="ulb2">
+                                                        <option value="" disabled selected>Choose ULB</option>
+                                                    </select>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="exampleSelect1">Select Segment</label>
+                                                    <select class="form-control col-sm-1" id="segment1">
+                                                        <option value="" disabled selected>Choose your Segment</option>
+                                                    </select>
+                                                </div>
+
+
+                                                <div class="form-group">
+                                                    <label for="asset_type">Select Asset Type</label>
+                                                    <select class="form-control col-sm-1" id="asset_type">
+                                                        <option value="" disabled selected>Choose your Asset Type</option>
+                                                        <option value="01">Intake Structure</option>
+                                                        <option value="02">WTP</option>
+                                                        <option value="03">SUMP</option>
+                                                        <option value="04">OHBR</option>
+                                                        <option value="05">BPT</option>
+                                                        <option value="06">GLBR</option>
+                                                        <option value="07">OHSR</option>
+                                                        <option value="08">GLSR</option>
+                                                        <option value="09">Pump House</option>
+                                                        <option value="10">Footpath Bridge</option>
+                                                        <option value="11">Pumps</option>
+                                                        <option value="14">Thrust Blocks</option>
+                                                        <option value="15">Valve Chambers</option>
+                                                    </select>
+                                                    <!--<label class="required">Select Asset Type</label>-->
+                                                </div>
+                                                <input class="btn btn-default center-block search_asset" type="submit" value="Search" name="search" id="search_asset1">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
                             </div>
-                            
-                            <div class="form-group">
-                                <label for="exampleSelect1">Select Constituency</label>
-                                <select class="form-control col-sm-1" id="constituency">
-                                    <option value="" disabled selected>Choose your Constituency</option>
-                                </select>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="exampleSelect1">Select Mandal</label>
-                                <select class="form-control col-sm-1" id="mandal">
-                                    <option value="" disabled selected>Choose your Mandal</option>
-                                </select>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="exampleSelect1">Select Panchayath</label>
-                                <select class="form-control col-sm-1" id="panchayat">
-                                    <option value="" disabled selected>Choose your Panchayath</option>
-                                </select>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="exampleSelect1">Select Village</label>
-                                <select class="form-control col-sm-1" id="village">
-                                    <option value="" disabled selected>Choose your Village</option>
-                                </select>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="exampleSelect1">Select Habitation</label>
-                                <select class="form-control col-sm-1" id="habitation">
-                                    <option value="" disabled selected>Choose your Habitation</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleSelect1">Select Segment</label>
-                                <select class="form-control col-sm-1" id="segment">
-                                    <option value="" disabled selected>Choose your Segment</option>
-                                </select>
-                            </div>
-                            
-                             
-                            <div class="form-group">
-                                <label for="asset_type">Select Asset Type</label>
-                                <select class="form-control col-sm-1" id="asset_type">
-                                    <option value="" disabled selected>Choose your Asset Type</option>
-                                    <option value="01">Intake Structure</option>
-                                    <option value="02">WTP</option>
-                                    <option value="03">SUMP</option>
-                                    <option value="04">OHBR</option>
-                                    <option value="05">BPT</option>
-                                    <option value="06">GLBR</option>
-                                    <option value="07">OHSR</option>
-                                    <option value="08">GLSR</option>
-                                    <option value="09">Pump House</option>
-                                    <option value="10">Footpath Bridge</option>
-                                    <option value="11">Pumps</option>
-                                    <option value="14">Thrust Blocks</option>
-                                    <option value="15">Valve Chambers</option>
-                                </select>
-                                <!--<label class="required">Select Asset Type</label>-->
-                            </div>
-                            <input class="btn btn-default center-block search_asset" type="submit" value="Submit" name="search" id="search_asset">
-      </div>
-    </div>
-  </div>
- 
-</div>
-                            
-                                                        
                             <div id="accordion " role="tablist" aria-multiselectable="true">
-  
-  <div class="card hide assetlistacc">
-    <div class="card-header" role="tab" id="headingThree">
-      <h4 class="mb-0">
-        <a class="collapsed " id="assetbasedonSelection" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-          Assets list based on selected location
-        </a>
-      </h4>
-    </div>
-    <div id="collapseThree" class="collapse" role="tabpanel" aria-labelledby="headingThree">
-      <div class="card-block">
-         <div class="assets_list">
-                                
-                            </div>
-                            
-                            
-      </div>
-    </div>
-  </div>
- 
-</div>
-                                                        <div id="accordion" role="tablist" aria-multiselectable="true">
-  
-  <div class="card hide basicdet">
-    <div class="card-header" role="tab" id="headingfive10">
-      <h4 class="mb-0">
-        <a class="collapsed" id="basicdetails" data-toggle="collapse" data-parent="#accordion" href="#collapsefive10" aria-expanded="false" aria-controls="collapsefive">
-          Structure Basic Details
-        </a>
-      </h4>
-    </div>
-    <div id="collapsefive10" class="collapse" role="tabpanel" aria-labelledby="headingfive10">
-      <div class="card-block">
-<!--         <div class="form-group">
-                                <label for="disabledTextInput">Location</label>
-                                <input class="form-control" type="text" id="location" placeholder="Location" readonly>
-                            </div>-->
-                            
-                            <div class="form-group">
-                                <label for="disabledTextInput">Agreement Number</label>
-                                <input class="form-control" type="text" id="agmtNumber" placeholder="Agreement Number" readonly>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="disabledTextInput">Agent name</label>
-                                <input class="form-control" type="text" id="agentName" placeholder="Agent name" readonly>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="disabledTextInput">Agreement Date</label>
-                                <input class="form-control" type="text" id="agreementdate" placeholder="Agreement Date" readonly>
-                            </div>
-                           
-                            <div class="form-group">
-                                <label for="disabledTextInput">Contract Amount(In lakhs)</label>
-                                <input class="form-control" id="contractAmt" type="text" placeholder="Contract Amount(In lakhs)" readonly>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="disabledTextInput">Target Date</label>
-                                <input class="form-control" type="text" id="targetdate"  placeholder="Target Date" readonly>
-                            </div>
-                            <div class="form-group">
-                                <label for="disabledTextInput">Completed %</label>
-                                <input class="form-control" type="text" id="compPer" placeholder="Completed %" readonly>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="disabledTextInput">Amount Paid</label>
-                                <input class="form-control" type="text" id="amtPaid" placeholder="Amount Paid" readonly>
-                            </div>
-                            
-                            <input class="btn btn-default center-block" type="submit" value="proceed" name="search" id="proceed">
-                            
-                            
-      </div>
-    </div>
-  </div>
- 
-</div>
-                            
-                                                                                    <div id="accordion" role="tablist" aria-multiselectable="true">
-  
-  <div class="card hide basicdet">
-    <div class="card-header" role="tab" id="headingfive12">
-      <h4 class="mb-0">
-        <a class="collapsed" id="basicparamsdetails" data-toggle="collapse" data-parent="#accordion" href="#collapsefive12" aria-expanded="false" aria-controls="collapsefive">
-          Structure Parameters 
-        </a>
-      </h4>
-    </div>
-    <div id="collapsefive12" class="collapse" role="tabpanel" aria-labelledby="headingfive12">
-      <div class="card-block">
-<div class="work">
-                            <div class="intakeparams hide">
-                                <div class="form-group">
-                                <label for="disabledTextInput">Circle Height</label>
-                                <input class="form-control" id="circleht" type="text" placeholder="Height in Mt" readonly>
-                                </div>
-                                <br>
-                                
-                                <div class="form-group">
-                                <label for="disabledTextInput">Circle Dia</label>
-                                <input class="form-control" id="circledia" type="text" placeholder="Dia in Mt" readonly>
-                                </div>
-                                
-                                
-                                <br>
-                                
-                                <div class="form-group">
-                                <label for="disabledTextInput">Length</label>
-                                <input class="form-control" id="lt" type="text" placeholder="Length in Mt" readonly>
-                                </div>
-                                
-                                <br>
-                                
-                                <div class="form-group">
-                                <label for="disabledTextInput">Breadth</label>
-                                <input class="form-control" id="breadth" type="text" placeholder="Breadth in Mt" readonly>
-                                </div>
-                                <br>
-                                
-                                <div class="form-group">
-                                <label for="disabledTextInput">Height</label>
-                                <input class="form-control" id="ht" type="text" placeholder="Height in Mt" readonly>
-                                </div>
-                            </div>
-                            
-                            <div class="wtpparams hide">
-                                <div class="form-group">
-                                <label for="disabledTextInput">Capcity</label>
-                                <input class="form-control" id="wtpcapacity" type="text" placeholder="Capcity in MLD" readonly>
-                                </div>
-                                
-                                
-                            </div>
 
-                            
-                            <div class="sumpparams hide">
-                                <div class="form-group">
-                                <label for="disabledTextInput">Circle Height</label>
-                                <input class="form-control" id="sumpcircleht" type="text" placeholder="Height in Mt" readonly>
-                                </div>
-                                
-                                <div class="form-group">
-                                <label for="disabledTextInput">Circle Dia</label>
-                                <input class="form-control" id="sumpcircledia" type="text" placeholder="Dia in Mt" readonly>
-                                </div>
-                                
-                                <div class="form-group">
-                                <label for="disabledTextInput">Length</label>
-                                <input class="form-control" id="sumplt" type="text" placeholder="Length in Mt" readonly>
-                                </div>
-                                
-                                <div class="form-group">
-                                <label for="disabledTextInput">Breadth</label>
-                                <input class="form-control" id="sumpbreadth" type="text" placeholder="Breadth in Mt" readonly>
-                                </div>
-                                
-                                <div class="form-group">
-                                <label for="disabledTextInput">Height</label>
-                                <input class="form-control" id="sumpht" type="text" placeholder="Height in Mt" readonly>
-                                </div>
-<!--                                
-                                <br>
-                                <div class="form-group">
-                                <label for="disabledTextInput">Capacity</label>
-                                <input class="form-control" id="sumpcapacity" type="text" placeholder="Capacity in KL" readonly>
-                                </div>-->
-                                
-                            </div>
+                                <div class="card hide assetlistacc">
+                                    <div class="card-header" role="tab" id="headingThree">
+                                        <h4 class="mb-0">
+                                            <a class="collapsed " id="assetbasedonSelection" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                                Assets list based on selected location
+                                            </a>
+                                        </h4>
+                                    </div>
+                                    <div id="collapseThree" class="collapse" role="tabpanel" aria-labelledby="headingThree">
+                                        <div class="card-block">
+                                            <div class="assets_list">
 
-                            <div class="ohbrparams hide">
-                                <div class="form-group">
-                                <label for="disabledTextInput">Staging</label>
-                                <input class="form-control" id="staging" type="text" placeholder="Staging in Mt" readonly>
-                                </div>
-                                
-                                <br>
-                                <div class="form-group">
-                                <label for="disabledTextInput">Capacity</label>
-                                <input class="form-control" id="ohbrcapacity" type="text" placeholder="Capacity in KL" readonly>
-                                </div>
-                                
-                                
-                            </div>
+                                            </div>
 
 
-                            <div class="fpbparams hide">
-                                
-                                <div class="form-group">
-                                <label for="disabledTextInput">Length</label>
-                                <input class="form-control" id="phlt" type="text" placeholder="Length in Mt" readonly>
+                                        </div>
+                                    </div>
                                 </div>
-                                
-                                <br>
-                                
-                                <div class="form-group">
-                                <label for="disabledTextInput">Breadth</label>
-                                <input class="form-control" id="phbt" type="text" placeholder="Breadth in Mt" readonly>
-                                </div>
-                                <br>
-                                
-                                <div class="form-group">
-                                <label for="disabledTextInput">Height</label>
-                                <input class="form-control" id="phht" type="text" placeholder="Height in Mt" readonly>
-                                </div>
-                            </div>
-    
-                            <div class="pumpsparams hide">
-                                
-                                <div class="form-group">
-                                <label for="disabledTextInput">Type of pump</label>
-                                <input class="form-control" id="pumptype" type="text" placeholder="pump type" readonly>
-                                </div>
-                                
-                                <br>
-                                
-                                <div class="form-group">
-                                <label for="disabledTextInput">Capacity</label>
-                                <input class="form-control" id="pumpcapacity" type="text" placeholder="Capacity" readonly>
-                                </div>
-                                <br>
-                            </div>
-   
-                        </div>
-                            
-                            <input class="btn btn-default center-block" type="submit" value="proceed" name="search" id="proceedparams">
-                            
-                            
-      </div>
-    </div>
-  </div>
- 
-</div>
-                            
-                                                                    
-    <div id="accordion" role="tablist" aria-multiselectable="true">
-  
-  <div class="card hide phyprogclass">
-    <div class="card-header" role="tab" id="headingfour">
-      <h4 class="mb-0">
-        <a class="collapsed" id="physicalprogress" data-toggle="collapse" data-parent="#accordion" href="#collapsefour" aria-expanded="false" aria-controls="collapsefour">
-          Enter asset physical progress
-        </a>
-      </h4>
-    </div>
-    <div id="collapsefour" class="collapse" role="tabpanel" aria-labelledby="headingfour">
-      <div class="card-block">
-         <div class="form-group row ipcompPerclass">
-                                <label for="example-number-input" class="col-xs-4 col-form-label">Completed %</label>
-                                <div class="col-xs-8">
-                                    <input class="form-control" type="number" id="ipcompPer" value="" >
-                                </div>
-                            </div> 
-                            <div class="form-group row hide ipcommisionedDate">
-                                <label for="example-date-input" class="col-xs-4 col-form-label">Commissioned Date</label>
-                                <div class="col-xs-8">
-                                    <input class="form-control" type="date" value="" id="ipcommisionedDate">
-                                </div>
-                            </div>
-                            
-                            
-                            <form class="form-inline">
-                                <div class="form-group latitude">
-                                    <input type="text" class="form-control" id="latitude" placeholder="Latitude" readonly>
-                                </div>
-                                <div class="form-group longitude">
-                                    <input type="text" class="form-control" id="longitude" placeholder="Longitude" readonly>
-                                </div>
-                                <button  type="button" id="gps" onclick="getLocation()" style="align-items: center" class="btn btn-primary"><i class="fa fa-map-marker hide" style="font-size:28px;color:red"></i></button>
-                                <!--<button type="button" id="img" style="align-items: center" class="btn btn-primary"><i class="fa fa-camera" style="font-size:28px;color:black"></i></button>-->
-<!--                                <span class="btn btn-default btn-file">
-                                    <i class="fa fa-camera" style="font-size:28px;color:black"></i>Image <input  type="file" id="assetImage" accept="image/*" name="assetImage" capture="camera" data-filetype=".png,.gif,.jpeg,.jpg,.JPEG,.JPG" data-filesize="5" >
-                                    <input type="hidden" id="assetImageData" name="assetImageData">
-                                </span>-->
-<!--<button onclick="capturePhotoWithData();">Capture Photo</button> <br>-->
-                                <button id="assetImage" onclick="capturePhotoWithData(this);">Capture Photo</button> <br>
-                            </form>
-                           
-                            <div class="form-group row hide">
-                                <label for="example-text-input" class="col-xs-2 col-form-label">Remarks</label>
-                                <div class="col-xs-10">
-                                    <input class="form-control" type="text" id="remarks" placeholder="Enter remarks here" id="example-text-input">
-                                </div>
-                            </div>  
 
-                            <div id="accordion " role="tablist" aria-multiselectable="true">
-  
-  <div class="card assetworkdet">
-    <div class="card-header" role="tab" id="headingThree8">
-      <h4 class="mb-0">
-        <a class="collapsed " id="assetworkdetails" data-toggle="collapse" data-parent="#accordion" href="#collapseThree8" aria-expanded="false" aria-controls="collapseThree">
-          Work Details
-        </a>
-      </h4>
-    </div>
-    <div id="collapseThree8" class="collapse" role="tabpanel" aria-labelledby="headingThree8">
-      <div class="card-block">
-         <div class="assets_info hide center-block">
-                                <h1>Structure completed</h1>
                             </div>
-                            
-                                                    <div class="work">
-                            <div class="intake hide">
-                                <div class="form-group">
-                                <label for="intake">PFL Stage</label>
-                                <select class="form-control col-sm-1" id="pflstage">
-                                    <option value="" disabled selected>Choose your Work Status</option>
-                                    <option value="01">Not Started</option>
-                                    <option value="02">In Progress</option>
-                                    <option value="03">Completed</option>
-                                </select>
-                                </div>
-                                
-                                <div class="col-xs-14">
-                                    <input class="form-control" type="text" id="intake_pfl_remarks" placeholder="Remarks on work status" id="example-text-input">
-                                </div>
-                                <br>
-                                
-                                <div class="form-group">
-                                <label for="intake">Sidewall Staging</label>
-                                <select class="form-control col-sm-1" id="sidewalllevel">
-                                    <option value=" " disabled selected>Choose your Work Status</option>
-                                    <option value="01">Not Started</option>
-                                    <option value="02">In Progress</option>
-                                    <option value="03">Completed</option>
-                                </select>
-                                </div>
-                                
-                                <div class="col-xs-14">
-                                    <input class="form-control" type="text" id="intake_sidewall_remarks" placeholder="Remarks on work status" id="example-text-input">
-                                </div>
-                                
-                                <br>
-                                
-                                <div class="form-group">
-                                <label for="intake">Finishing Stage</label>
-                                <select class="form-control col-sm-1" id="intakeFinishingStage">
-                                    <option value=" " disabled selected>Choose your Work Status</option>
-                                    <option value="01">Not Started</option>
-                                    <option value="02">In Progress</option>
-                                    <option value="03">Completed</option>
-                                </select>
-                                </div>
-                                
-                                <div class="col-xs-14">
-                                    <input class="form-control" type="text" id="intake_finishing_remarks" placeholder="Remarks on work status" id="example-text-input">
-                                </div>
-                                
-                            </div>
-                            
-                            <div class="wtp hide">
-                                <div class="form-group">
-                                <label for="wtp">Aerator</label>
-                                <select class="form-control col-sm-1" id="wtp_aerator">
-                                    <option value="" disabled selected>Choose your Work Status</option>
-                                    <option value="01">Not Started</option>
-                                    <option value="02">In Progress</option>
-                                    <option value="03">Completed</option>
-                                </select>
-                                </div>
-                                
-                                <div class="col-xs-14">
-                                    <input class="form-control" type="text" id="wtp_aerator_remarks" placeholder="Remarks on work status" id="example-text-input">
-                                </div>
-                                <br>
-                                
-                                <div class="form-group">
-                                <label for="wtp">Flash Mixer</label>
-                                <select class="form-control col-sm-1" id="wtp_flashmixer">
-                                    <option value="" disabled selected>Choose your Work Status</option>
-                                    <option value="01">Not Started</option>
-                                    <option value="02">In Progress</option>
-                                    <option value="03">Completed</option>
-                                </select>
-                                </div>
-                                
-                                <div class="col-xs-14">
-                                    <input class="form-control" type="text" id="wtp_flashmix_remarks" placeholder="Remarks on work status" id="example-text-input">
-                                </div>
-                                
-                                <br>
-                                
-                                <div class="form-group">
-                                <label for="wtp">Back Wash Water Tank</label>
-                                <select class="form-control col-sm-1" id="wtp_backwash">
-                                    <option value="" disabled selected>Choose your Work Status</option>
-                                    <option value="01">Not Started</option>
-                                    <option value="02">In Progress</option>
-                                    <option value="03">Completed</option>
-                                </select>
-                                </div>
-                                
-                                <div class="col-xs-14">
-                                    <input class="form-control" type="text" id="wtp_backwash_remarks" placeholder="Remarks on work status" id="example-text-input">
-                                </div>
-                                
-                                <br>
-                                
-                                <div class="form-group">
-                                <label for="wtp">Chemical House</label>
-                                <select class="form-control col-sm-1" id="wtp_chemical_house">
-                                    <option value="" disabled selected>Choose your Work Status</option>
-                                    <option value="01">Not Started</option>
-                                    <option value="02">In Progress</option>
-                                    <option value="03">Completed</option>
-                                </select>
-                                </div>
-                                
-                                <div class="col-xs-14">
-                                    <input class="form-control" type="text" id="wtp_chem_remarks" placeholder="Remarks on work status" id="example-text-input">
-                                </div>
-                                
-                                <br>
-                                
-                                <div class="form-group">
-                                <label for="wtp">Chlorination House</label>
-                                <select class="form-control col-sm-1" id="wtp_chlorination">
-                                    <option value="" disabled selected>Choose your Work Status</option>
-                                    <option value="01">Not Started</option>
-                                    <option value="02">In Progress</option>
-                                    <option value="03">Completed</option>
-                                </select>
-                                </div>
-                                
-                                <div class="col-xs-14">
-                                    <input class="form-control" type="text" id="wtp_cholorination_remarks" placeholder="Remarks on work status" id="example-text-input">
-                                </div>
-                                
-                                <br>
-                                
-                                <div class="form-group">
-                                <label for="wtp">Clariflocculator</label>
-                                <select class="form-control col-sm-1" id="wtp_clariflocculator">
-                                    <option value="" disabled selected>Choose your Work Status</option>
-                                    <option value="01">Not Started</option>
-                                    <option value="02">In Progress</option>
-                                    <option value="03">Completed</option>
-                                </select>
-                                </div>
-                                
-                                <div class="col-xs-14">
-                                    <input class="form-control" type="text" id="wtp_clarifloc_remarks" placeholder="Remarks on work status" id="example-text-input">
-                                </div>
-                                
-                                <br>
-                                
-                                <div class="form-group">
-                                <label for="wtp">Filter House</label>
-                                <select class="form-control col-sm-1" id="wtp_filter_house">
-                                    <option value="" disabled selected>Choose your Work Status</option>
-                                    <option value="01">Not Started</option>
-                                    <option value="02">In Progress</option>
-                                    <option value="03">Completed</option>
-                                </select>
-                                </div>
-                                
-                                <div class="col-xs-14">
-                                    <input class="form-control" type="text" id="wtp_filter_house_remarks" placeholder="Remarks on work status" id="example-text-input">
-                                </div>
-                                
-                                <br>
-                                
-                                <div class="form-group">
-                                <label for="wtp">Electro Mechanical</label>
-                                <select class="form-control col-sm-1" id="wtp_electromech">
-                                    <option value="" disabled selected>Choose your Work Status</option>
-                                    <option value="01">Not Started</option>
-                                    <option value="02">In Progress</option>
-                                    <option value="03">Completed</option>
-                                </select>
-                                </div>
-                                
-                                <div class="col-xs-14">
-                                    <input class="form-control" type="text" id="wtp_electromech_remarks" placeholder="Remarks on work status" id="example-text-input">
-                                </div>
-                                
-                                <br>
-                                
-                                <div class="form-group">
-                                <label for="wtp">Trial Run</label>
-                                <select class="form-control col-sm-1" id="wtp_trialrun">
-                                    <option value="" disabled selected>Choose your Work Status</option>
-                                    <option value="01">Not Started</option>
-                                    <option value="02">In Progress</option>
-                                    <option value="03">Completed</option>
-                                </select>
-                                </div>
-                                
-                                <div class="col-xs-14">
-                                    <input class="form-control" type="text" id="wtp_trialrun_remarks" placeholder="Remarks on work status" id="example-text-input">
-                                </div>
-                                
-                            </div>
-
-                            
-                            <div class="sump hide">
-                                <div class="form-group">
-                                <label for="sump">EarthWork Excavation</label>
-                                <select class="form-control col-sm-1" id="sumpEwExcavation">
-                                    <option value="" disabled selected>Choose your Work Status</option>
-                                    <option value="01">Not Started</option>
-                                    <option value="02">In Progress</option>
-                                    <option value="03">Completed</option>
-                                </select>
-                                </div>
-                                
-                                <div class="col-xs-14">
-                                    <input class="form-control" type="text" id="sumpEwExcavation_remarks" placeholder="Remarks on work status" id="example-text-input">
-                                </div>
-                                <br>
-                                
-                                <div class="form-group">
-                                <label for="sump">PCC Stage</label>
-                                <select class="form-control col-sm-1" id="sumpPccstage">
-                                    <option value="" disabled selected>Choose your Work Status</option>
-                                    <option value="01">Not Started</option>
-                                    <option value="02">In Progress</option>
-                                    <option value="03">Completed</option>
-                                </select>
-                                </div>
-                                
-                                <div class="col-xs-14">
-                                    <input class="form-control" type="text" id="sumpPccstage_remarks" placeholder="Remarks on work status" id="example-text-input">
-                                </div>
-                                
-                                <br>
-                                
-                                <div class="form-group">
-                                <label for="sump">Raft Stage</label>
-                                <select class="form-control col-sm-1" id="sumpRaftstage">
-                                    <option value="" disabled selected>Choose your Work Status</option>
-                                    <option value="01">Not Started</option>
-                                    <option value="02">In Progress</option>
-                                    <option value="03">Completed</option>
-                                </select>
-                                </div>
-                                
-                                <div class="col-xs-14">
-                                    <input class="form-control" type="text" id="sumpRaftstage_remarks" placeholder="Remarks on work status" id="example-text-input">
-                                </div>
-                                
-                                <br>
-                                
-                                <div class="form-group">
-                                <label for="sump">Sidewall Staging</label>
-                                <select class="form-control col-sm-1" id="sumpSidewallStaging">
-                                    <option value="" disabled selected>Choose your Work Status</option>
-                                    <option value="01">Not Started</option>
-                                    <option value="02">In Progress</option>
-                                    <option value="03">Completed</option>
-                                </select>
-                                </div>
-                                
-                                <div class="col-xs-14">
-                                    <input class="form-control" type="text" id="sumpSidewallStaging_remarks" placeholder="Remarks on work status" id="example-text-input">
-                                </div>
-                                
-                                <br>
-                                
-                                <div class="form-group">
-                                <label for="sump">Top Slab Level</label>
-                                <select class="form-control col-sm-1" id="sumpTopSlabLevel">
-                                    <option value="" disabled selected>Choose your Work Status</option>
-                                    <option value="01">Not Started</option>
-                                    <option value="02">In Progress</option>
-                                    <option value="03">Completed</option>
-                                </select>
-                                </div>
-                                
-                                <div class="col-xs-14">
-                                    <input class="form-control" type="text" id="sumpTopSlabLevel_remarks" placeholder="Remarks on work status" id="example-text-input">
-                                </div>
-                                
-                                <br>
-                                
-                                <div class="form-group">
-                                <label for="sump">Fixing CI Specials</label>
-                                <select class="form-control col-sm-1" id="sumpCiSpecial">
-                                    <option value="" disabled selected>Choose your Work Status</option>
-                                    <option value="01">Not Started</option>
-                                    <option value="02">In Progress</option>
-                                    <option value="03">Completed</option>
-                                </select>
-                                </div>
-                                
-                                <div class="col-xs-14">
-                                    <input class="form-control" type="text" id="sumpCiSpecial_remarks" placeholder="Remarks on work status" id="example-text-input">
-                                </div>
-                                
-                                <br>
-                                
-                                <div class="form-group">
-                                <label for="sump">Finishing Stage</label>
-                                <select class="form-control col-sm-1" id="sumpFinishingStage">
-                                    <option value="" disabled selected>Choose your Work Status</option>
-                                    <option value="01">Not Started</option>
-                                    <option value="02">In Progress</option>
-                                    <option value="03">Completed</option>
-                                </select>
-                                </div>
-                                
-                                <div class="col-xs-14">
-                                    <input class="form-control" type="text" id="sumpFinishingStage_remarks" placeholder="Remarks on work status" id="example-text-input">
-                                </div>
-                                
-                                
-                            </div>
-
-                            <div class="ohbr hide">
-                                <div class="form-group">
-                                <label for="ohbr">EarthWork Excavation</label>
-                                <select class="form-control col-sm-1" id="ewExcavation">
-                                    <option value="" disabled selected>Choose your Work Status</option>
-                                    <option value="01">Not Started</option>
-                                    <option value="02">In Progress</option>
-                                    <option value="03">Completed</option>
-                                </select>
-                                </div>
-                                
-                                <div class="col-xs-14">
-                                    <input class="form-control" type="text" id="ewExcavation_remarks" placeholder="Remarks on work status" id="example-text-input">
-                                </div>
-                                <br>
-                                
-                                <div class="form-group">
-                                <label for="ohbr">PCC Stage</label>
-                                <select class="form-control col-sm-1" id="pccstage">
-                                    <option value="" disabled selected>Choose your Work Status</option>
-                                    <option value="01">Not Started</option>
-                                    <option value="02">In Progress</option>
-                                    <option value="03">Completed</option>
-                                </select>
-                                </div>
-                                
-                                <div class="col-xs-14">
-                                    <input class="form-control" type="text" id="pccstage_remarks" placeholder="Remarks on work status" id="example-text-input">
-                                </div>
-                                
-                                <br>
-                                
-                                <div class="form-group">
-                                <label for="ohbr">Raft Stage</label>
-                                <select class="form-control col-sm-1" id="raftstage">
-                                    <option value="" disabled selected>Choose your Work Status</option>
-                                    <option value="01">Not Started</option>
-                                    <option value="02">In Progress</option>
-                                    <option value="03">Completed</option>
-                                </select>
-                                </div>
-                                
-                                <div class="col-xs-14">
-                                    <input class="form-control" type="text" id="raftstage_remarks" placeholder="Remarks on work status" id="example-text-input">
-                                </div>
-                                
-                                <br>
-                                
-                                <div class="form-group">
-                                <label for="ohbr">GL Stage</label>
-                                <select class="form-control col-sm-1" id="glstage">
-                                    <option value="" disabled selected>Choose your Work Status</option>
-                                    <option value="01">Not Started</option>
-                                    <option value="02">In Progress</option>
-                                    <option value="03">Completed</option>
-                                </select>
-                                </div>
-                                
-                                <div class="col-xs-14">
-                                    <input class="form-control" type="text" id="glstage_remarks" placeholder="Remarks on work status" id="example-text-input">
-                                </div>
-                                
-                                <br>
-                                
-                                <div class="form-group">
-                                <label for="ohbr">Staging Level</label>
-                                <select class="form-control col-sm-1" id="stagingLevel">
-                                    <option value="" disabled selected>Choose your Work Status</option>
-                                    <option value="01">Not Started</option>
-                                    <option value="02">In Progress</option>
-                                    <option value="03">Completed</option>
-                                </select>
-                                </div>
-                                
-                                <div class="col-xs-14">
-                                    <input class="form-control" type="text" id="stagingLevel_remarks" placeholder="Remarks on work status" id="example-text-input">
-                                </div>
-                                
-                                <br>
-                                
-                                <div class="form-group">
-                                <label for="ohbr">Bottom Slab</label>
-                                <select class="form-control col-sm-1" id="bottomSlab">
-                                    <option value="" disabled selected>Choose your Work Status</option>
-                                    <option value="01">Not Started</option>
-                                    <option value="02">In Progress</option>
-                                    <option value="03">Completed</option>
-                                </select>
-                                </div>
-                                
-                                <div class="col-xs-14">
-                                    <input class="form-control" type="text" id="bottomSlab_remarks" placeholder="Remarks on work status" id="example-text-input">
-                                </div>
-                                
-                                <br>
-                                
-                                <div class="form-group">
-                                <label for="ohbr">Sidewall Staging</label>
-                                <select class="form-control col-sm-1" id="sidewallStaging">
-                                    <option value="" disabled selected>Choose your Work Status</option>
-                                    <option value="01">Not Started</option>
-                                    <option value="02">In Progress</option>
-                                    <option value="03">Completed</option>
-                                </select>
-                                </div>
-                                
-                                <div class="col-xs-14">
-                                    <input class="form-control" type="text" id="sidewallStaging_remarks" placeholder="Remarks on work status" id="example-text-input">
-                                </div>
-                                
-                                <br>
-                                
-                                <div class="form-group">
-                                <label for="ohbr">Top Slab Level</label>
-                                <select class="form-control col-sm-1" id="topSlabLevel">
-                                    <option value="" disabled selected>Choose your Work Status</option>
-                                    <option value="01">Not Started</option>
-                                    <option value="02">In Progress</option>
-                                    <option value="03">Completed</option>
-                                </select>
-                                </div>
-                                
-                                <div class="col-xs-14">
-                                    <input class="form-control" type="text" id="topSlabLevel_remarks" placeholder="Remarks on work status" id="example-text-input">
-                                </div>
-                                
-                                <br>
-                                
-                                <div class="form-group">
-                                <label for="ohbr">Fixing CI Specials</label>
-                                <select class="form-control col-sm-1" id="ciSpecial">
-                                    <option value="" disabled selected>Choose your Work Status</option>
-                                    <option value="01">Not Started</option>
-                                    <option value="02">In Progress</option>
-                                    <option value="03">Completed</option>
-                                </select>
-                                </div>
-                                
-                                <div class="col-xs-14">
-                                    <input class="form-control" type="text" id="ciSpecial_remarks" placeholder="Remarks on work status" id="example-text-input">
-                                </div>
-                                
-                                <br>
-                                
-                                <div class="form-group">
-                                <label for="ohbr">Finishing Stage</label>
-                                <select class="form-control col-sm-1" id="finishingStage">
-                                    <option value="" disabled selected>Choose your Work Status</option>
-                                    <option value="01">Not Started</option>
-                                    <option value="02">In Progress</option>
-                                    <option value="03">Completed</option>
-                                </select>
-                                </div>
-                                
-                                <div class="col-xs-14">
-                                    <input class="form-control" type="text" id="finishingStage_remarks" placeholder="Remarks on work status" id="example-text-input">
-                                </div>
-                                
-                                
-                            </div>
-
-
-                            <div class="fpb hide">
-                                
-                                <div class="form-group">
-                                <label for="fpb">Foundation Stage</label>
-                                <select class="form-control col-sm-1" id="foundationstage">
-                                    <option value="" disabled selected>Choose your Work Status</option>
-                                    <option value="01">Not Started</option>
-                                    <option value="02">In Progress</option>
-                                    <option value="03">Completed</option>
-                                </select>
-                                </div>
-                                
-                                <div class="col-xs-14">
-                                    <input class="form-control" type="text" id="foundationstage_remarks" placeholder="Remarks on work status" id="example-text-input">
-                                </div>
-                                
-                                <br>
-                                
-                                <div class="form-group">
-                                <label for="fpb">Column Stage</label>
-                                <select class="form-control col-sm-1" id="columnstage">
-                                    <option value="" disabled selected>Choose your Work Status</option>
-                                    <option value="01">Not Started</option>
-                                    <option value="02">In Progress</option>
-                                    <option value="03">Completed</option>
-                                </select>
-                                </div>
-                                
-                                <div class="col-xs-14">
-                                    <input class="form-control" type="text" id="columnstage_remarks" placeholder="Remarks on work status" id="example-text-input">
-                                </div>
-                                
-                                <br>
-                                
-                                <div class="form-group">
-                                <label for="fpb">Slab_level</label>
-                                <select class="form-control col-sm-1" id="slabLevel">
-                                    <option value="" disabled selected>Choose your Work Status</option>
-                                    <option value="01">Not Started</option>
-                                    <option value="02">In Progress</option>
-                                    <option value="03">Completed</option>
-                                </select>
-                                </div>
-                                
-                                <div class="col-xs-14">
-                                    <input class="form-control" type="text" id="slabLevel_remarks" placeholder="Remarks on work status" id="example-text-input">
-                                </div>
-                                
-                                
-                                <br>
-                                
-                                <div class="form-group">
-                                <label for="fpb">Finishing Stage</label>
-                                <select class="form-control col-sm-1" id="fbFinishingStage">
-                                    <option value="" disabled selected>Choose your Work Status</option>
-                                    <option value="01">Not Started</option>
-                                    <option value="02">In Progress</option>
-                                    <option value="03">Completed</option>
-                                </select>
-                                </div>
-                                
-                                <div class="col-xs-14 ">
-                                    <input class="form-control " type="text" id="fbFinishingStage_remarks" placeholder="Remarks on work status" id="example-text-input">
-                                </div>
-                                
-                                
-                            </div>
-                        </div>
-                            
-                            
-      </div>
-    </div>
-  </div>
- 
-                            </div>
-<input class="btn btn-default center-block" type="submit" value="proceed" name="search" id="proceedphy">
-      </div>
-    </div>
-  </div>
- 
-</div>                
-                                                                               
                             <div id="accordion" role="tablist" aria-multiselectable="true">
-  
-  <div class="card hide finprogclass">
-    <div class="card-header" role="tab" id="headingfive">
-      <h4 class="mb-0">
-        <a class="collapsed" id="financialprogress" data-toggle="collapse" data-parent="#accordion" href="#collapsefive" aria-expanded="false" aria-controls="collapsefive">
-          Enter asset Financial progress
-        </a>
-      </h4>
-    </div>
-    <div id="collapsefive" class="collapse" role="tabpanel" aria-labelledby="headingfive">
-      <div class="card-block">
-         <div class="form-group">
-                                <label class="col-xs-4 col-form-label" for="exampleInputAmount">Amount Paid</label>
-                                <div class="input-group">
-                                    <div class="input-group-addon">Rs</div>
-                                    <input type="text" class="form-control" id="ipamountPaid" placeholder="Amount">
-                                    <div class="input-group-addon">.00</div>
+
+                                <div class="card hide basicdet">
+                                    <div class="card-header" role="tab" id="headingfive10">
+                                        <h4 class="mb-0">
+                                            <a class="collapsed" id="basicdetails" data-toggle="collapse" data-parent="#accordion" href="#collapsefive10" aria-expanded="false" aria-controls="collapsefive">
+                                                Structure Basic Details
+                                            </a>
+                                        </h4>
+                                    </div>
+                                    <div id="collapsefive10" class="collapse" role="tabpanel" aria-labelledby="headingfive10">
+                                        <div class="card-block">
+                                            <!--         <div class="form-group">
+                                                                            <label for="disabledTextInput">Location</label>
+                                                                            <input class="form-control" type="text" id="location" placeholder="Location" readonly>
+                                                                        </div>-->
+
+                                            <div class="form-group">
+                                                <label for="disabledTextInput">Agreement Number</label>
+                                                <input class="form-control" type="text" id="agmtNumber" placeholder="Agreement Number" readonly>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="disabledTextInput">Agent name</label>
+                                                <input class="form-control" type="text" id="agentName" placeholder="Agent name" readonly>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="disabledTextInput">Agreement Date</label>
+                                                <input class="form-control" type="text" id="agreementdate" placeholder="Agreement Date" readonly>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="disabledTextInput">Contract Amount(In lakhs)</label>
+                                                <input class="form-control" id="contractAmt" type="text" placeholder="Contract Amount(In lakhs)" readonly>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="disabledTextInput">Target Date</label>
+                                                <input class="form-control" type="text" id="targetdate"  placeholder="Target Date" readonly>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="disabledTextInput">Completed %</label>
+                                                <input class="form-control" type="text" id="compPer" placeholder="Completed %" readonly>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="disabledTextInput">Amount Paid</label>
+                                                <input class="form-control" type="text" id="amtPaid" placeholder="Amount Paid" readonly>
+                                            </div>
+
+                                            <div class="card hide basicdet">
+                                                <div class="card-header" role="tab" id="headingfive12">
+                                                    <h4 class="mb-0">
+                                                        <a class="collapsed" id="basicparamsdetails" data-toggle="collapse" data-parent="#accordion" href="#collapsefive12" aria-expanded="false" aria-controls="collapsefive">
+                                                            Structure Parameters 
+                                                        </a>
+                                                    </h4>
+                                                </div>
+                                                <div id="collapsefive12" class="collapse" role="tabpanel" aria-labelledby="headingfive12">
+                                                    <div class="card-block">
+                                                        <div class="work">
+                                                            <div class="intakeparams hide">
+                                                                <div class="form-group">
+                                                                    <label for="disabledTextInput">Circle Height</label>
+                                                                    <input class="form-control" id="circleht" type="text" placeholder="Height in Mt" readonly>
+                                                                </div>
+                                                                <br>
+
+                                                                <div class="form-group">
+                                                                    <label for="disabledTextInput">Circle Dia</label>
+                                                                    <input class="form-control" id="circledia" type="text" placeholder="Dia in Mt" readonly>
+                                                                </div>
+
+
+                                                                <br>
+
+                                                                <div class="form-group">
+                                                                    <label for="disabledTextInput">Length</label>
+                                                                    <input class="form-control" id="lt" type="text" placeholder="Length in Mt" readonly>
+                                                                </div>
+
+                                                                <br>
+
+                                                                <div class="form-group">
+                                                                    <label for="disabledTextInput">Breadth</label>
+                                                                    <input class="form-control" id="breadth" type="text" placeholder="Breadth in Mt" readonly>
+                                                                </div>
+                                                                <br>
+
+                                                                <div class="form-group">
+                                                                    <label for="disabledTextInput">Height</label>
+                                                                    <input class="form-control" id="ht" type="text" placeholder="Height in Mt" readonly>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="wtpparams hide">
+                                                                <div class="form-group">
+                                                                    <label for="disabledTextInput">Capcity</label>
+                                                                    <input class="form-control" id="wtpcapacity" type="text" placeholder="Capcity in MLD" readonly>
+                                                                </div>
+
+
+                                                            </div>
+
+
+                                                            <div class="sumpparams hide">
+                                                                <div class="form-group">
+                                                                    <label for="disabledTextInput">Circle Height</label>
+                                                                    <input class="form-control" id="sumpcircleht" type="text" placeholder="Height in Mt" readonly>
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <label for="disabledTextInput">Circle Dia</label>
+                                                                    <input class="form-control" id="sumpcircledia" type="text" placeholder="Dia in Mt" readonly>
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <label for="disabledTextInput">Length</label>
+                                                                    <input class="form-control" id="sumplt" type="text" placeholder="Length in Mt" readonly>
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <label for="disabledTextInput">Breadth</label>
+                                                                    <input class="form-control" id="sumpbreadth" type="text" placeholder="Breadth in Mt" readonly>
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <label for="disabledTextInput">Height</label>
+                                                                    <input class="form-control" id="sumpht" type="text" placeholder="Height in Mt" readonly>
+                                                                </div>
+                                                                <!--                                
+                                                                                                <br>
+                                                                                                <div class="form-group">
+                                                                                                <label for="disabledTextInput">Capacity</label>
+                                                                                                <input class="form-control" id="sumpcapacity" type="text" placeholder="Capacity in KL" readonly>
+                                                                                                </div>-->
+
+                                                            </div>
+
+                                                            <div class="ohbrparams hide">
+                                                                <div class="form-group">
+                                                                    <label for="disabledTextInput">Staging</label>
+                                                                    <input class="form-control" id="staging" type="text" placeholder="Staging in Mt" readonly>
+                                                                </div>
+
+                                                                <br>
+                                                                <div class="form-group">
+                                                                    <label for="disabledTextInput">Capacity</label>
+                                                                    <input class="form-control" id="ohbrcapacity" type="text" placeholder="Capacity in KL" readonly>
+                                                                </div>
+
+
+                                                            </div>
+
+
+                                                            <div class="fpbparams hide">
+
+                                                                <div class="form-group">
+                                                                    <label for="disabledTextInput">Length</label>
+                                                                    <input class="form-control" id="phlt" type="text" placeholder="Length in Mt" readonly>
+                                                                </div>
+
+                                                                <br>
+
+                                                                <div class="form-group">
+                                                                    <label for="disabledTextInput">Breadth</label>
+                                                                    <input class="form-control" id="phbt" type="text" placeholder="Breadth in Mt" readonly>
+                                                                </div>
+                                                                <br>
+
+                                                                <div class="form-group">
+                                                                    <label for="disabledTextInput">Height</label>
+                                                                    <input class="form-control" id="phht" type="text" placeholder="Height in Mt" readonly>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="pumpsparams hide">
+
+                                                                <div class="form-group">
+                                                                    <label for="disabledTextInput">Type of pump</label>
+                                                                    <input class="form-control" id="pumptype" type="text" placeholder="pump type" readonly>
+                                                                </div>
+
+                                                                <br>
+
+                                                                <div class="form-group">
+                                                                    <label for="disabledTextInput">Capacity</label>
+                                                                    <input class="form-control" id="pumpcapacity" type="text" placeholder="Capacity" readonly>
+                                                                </div>
+                                                                <br>
+                                                            </div>
+
+                                                        </div>
+
+                                                        <!--<input class="btn btn-default center-block" type="submit" value="proceed" name="search" id="proceedparams">-->
+
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                            <input class="btn btn-default center-block" type="submit" value="proceed" name="search" id="proceed">
+
+
+                                        </div>
+                                    </div>
                                 </div>
+
                             </div>
-                            <div class="form-group row">
-                                <label for="example-date-input" class="col-xs-4 col-form-label">Paid Date</label>
-                                <div class="col-xs-8">
-                                    <input class="form-control" type="date" value="" id="ippaidDate">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="example-text-input" class="col-xs-4 col-form-label">M-Book No</label>
-                                <div class="col-xs-8">
-                                    <input class="form-control" type="text" id="ipmbook"  placeholder="Mbook No" id="example-text-input">
-                                </div>
-                            </div>
+
+                            <!--                            <div id="accordion" role="tablist" aria-multiselectable="true">
                             
                             
-      </div>
-    </div>
-  </div>
- 
-</div>                   
-                     <input class="btn btn-default center-block hide submitdetails" type="submit" value="Update" name="search" id="submit_details">  
-                     
+                            
+                                                        </div>-->
+
+
+                            <div id="accordion" role="tablist" aria-multiselectable="true">
+
+                                <div class="card  phyprogclass">
+                                    <div class="card-header" role="tab" id="headingfour">
+                                        <h4 class="mb-0">
+                                            <a class="collapsed" id="physicalprogress" data-toggle="collapse" data-parent="#accordion" href="#collapsefour" aria-expanded="false" aria-controls="collapsefour">
+                                                Enter asset physical progress
+                                            </a>
+                                        </h4>
+                                    </div>
+                                    <div id="collapsefour" class="collapse" role="tabpanel" aria-labelledby="headingfour">
+                                        <div class="card-block">
+                                            <div class="form-group row ipcompPerclass">
+                                                <label for="example-number-input" class="col-xs-4 col-form-label">Completed %</label>
+                                                <div class="col-xs-8">
+                                                    <input class="form-control" type="number" id="ipcompPer" value="" >
+                                                </div>
+                                            </div> 
+                                            <div class="form-group row ipcomplesionedDate">
+                                                <label for="completion-date-input" class="col-xs-4 col-form-label">Completed Date</label>
+                                                <div class="col-xs-8">
+                                                    <input class="form-control" type="date" value="" id="ipcompletedDate">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row hide ipcommisionedDate">
+                                                <label for="example-date-input" class="col-xs-4 col-form-label">Commissioned Date</label>
+                                                <div class="col-xs-8">
+                                                    <input class="form-control" type="date" value="" id="ipcommisionedDate">
+                                                </div>
+                                            </div>
+
+
+                                            <form class="form-inline">
+                                                <div class="form-group latitude">
+                                                    <input type="text" class="form-control" id="latitude" placeholder="Latitude" readonly>
+                                                </div>
+                                                <div class="form-group longitude">
+                                                    <input type="text" class="form-control" id="longitude" placeholder="Longitude" readonly>
+                                                </div>
+                                                <button  type="button" id="gps" onclick="getLocation()" style="align-items: center" class="btn btn-primary"><i class="fa fa-map-marker hide" style="font-size:28px;color:red"></i></button>
+                                              
+                                                <!--<button id="assetImage" onclick="capturePhotoWithData(this);">Capture Photo</button> <br>-->
+												<input onclick="capturePhotoEdit();" type="button" value="Take Photo"> <br>
+												<img style="display:none;width:60px;height:60px;" id="smallImage" src="" /><br>
+												<input id="assetImageData" value="" type="hidden"/>
+                                            </form>
+
+                                            <div class="form-group row">
+                                                <label for="example-text-input" class="col-xs-2 col-form-label">Remarks</label>
+                                                <div class="col-xs-10">
+                                                    <input class="form-control" type="text" id="remarks" placeholder="Enter remarks here" id="example-text-input">
+                                                </div>
+                                            </div>  
+
+                                            <div id="accordion " role="tablist" aria-multiselectable="true">
+
+                                                <div class="card assetworkdet">
+                                                    <div class="card-header" role="tab" id="headingThree8">
+                                                        <h4 class="mb-0">
+                                                            <a class="collapsed " id="assetworkdetails" data-toggle="collapse" data-parent="#accordion" href="#collapseThree8" aria-expanded="false" aria-controls="collapseThree">
+                                                                Asset Work Progress Details
+                                                            </a>
+                                                        </h4>
+                                                    </div>
+                                                    <div id="collapseThree8" class="collapse" role="tabpanel" aria-labelledby="headingThree8">
+                                                        <div class="card-block">
+                                                            <div class="assets_info hide center-block">
+                                                                <h1>Structure work completed Details</h1>
+                                                            </div>
+
+                                                            <div class="work">
+                                                                <div class="intake hide">
+                                                                    <div class="form-group">
+                                                                        <label for="intake">PFL Stage</label>
+                                                                        <select class="form-control col-sm-1" id="pflstage">
+                                                                            <option value="" disabled selected>Choose your Work Status</option>
+                                                                            <option value="Not Started">Not Started</option>
+                                                                            <option value="In Progress">In Progress</option>
+                                                                            <option value="Completed">Completed</option>
+                                                                        </select>
+                                                                    </div>
+
+                                                                    <div class="col-xs-14">
+                                                                        <input class="form-control" type="text" id="intake_pfl_remarks" placeholder="Remarks on work status" id="example-text-input">
+                                                                    </div>
+                                                                    <br>
+
+                                                                    <div class="form-group">
+                                                                        <label for="intake">Sidewall Staging</label>
+                                                                        <select class="form-control col-sm-1" id="sidewalllevel">
+                                                                            <option value=" " disabled selected>Choose your Work Status</option>
+                                                                            <option value="Not Started">Not Started</option>
+                                                                            <option value="In Progress">In Progress</option>
+                                                                            <option value="Completed">Completed</option>
+                                                                        </select>
+                                                                    </div>
+
+                                                                    <div class="col-xs-14">
+                                                                        <input class="form-control" type="text" id="intake_sidewall_remarks" placeholder="Remarks on work status" id="example-text-input">
+                                                                    </div>
+
+                                                                    <br>
+
+                                                                    <div class="form-group">
+                                                                        <label for="intake">Finishing Stage</label>
+                                                                        <select class="form-control col-sm-1" id="intakeFinishingStage">
+                                                                            <option value=" " disabled selected>Choose your Work Status</option>
+                                                                            <option value="Not Started">Not Started</option>
+                                                                            <option value="In Progress">In Progress</option>
+                                                                            <option value="Completed">Completed</option>
+                                                                        </select>
+                                                                    </div>
+
+                                                                    <div class="col-xs-14">
+                                                                        <input class="form-control" type="text" id="intake_finishing_remarks" placeholder="Remarks on work status" id="example-text-input">
+                                                                    </div>
+
+                                                                </div>
+
+                                                                <div class="wtp hide">
+                                                                    <div class="form-group">
+                                                                        <label for="wtp">Aerator</label>
+                                                                        <select class="form-control col-sm-1" id="wtp_aerator">
+                                                                            <option value="" disabled selected>Choose your Work Status</option>
+                                                                            <option value="Not Started">Not Started</option>
+                                                                            <option value="In Progress">In Progress</option>
+                                                                            <option value="Completed">Completed</option>
+                                                                        </select>
+                                                                    </div>
+
+                                                                    <div class="col-xs-14">
+                                                                        <input class="form-control" type="text" id="wtp_aerator_remarks" placeholder="Remarks on work status" id="example-text-input">
+                                                                    </div>
+                                                                    <br>
+
+                                                                    <div class="form-group">
+                                                                        <label for="wtp">Flash Mixer</label>
+                                                                        <select class="form-control col-sm-1" id="wtp_flashmixer">
+                                                                            <option value="" disabled selected>Choose your Work Status</option>
+                                                                            <option value="Not Started">Not Started</option>
+                                                                            <option value="In Progress">In Progress</option>
+                                                                            <option value="Completed">Completed</option>
+                                                                        </select>
+                                                                    </div>
+
+                                                                    <div class="col-xs-14">
+                                                                        <input class="form-control" type="text" id="wtp_flashmix_remarks" placeholder="Remarks on work status" id="example-text-input">
+                                                                    </div>
+
+                                                                    <br>
+
+                                                                    <div class="form-group">
+                                                                        <label for="wtp">Back Wash Water Tank</label>
+                                                                        <select class="form-control col-sm-1" id="wtp_backwash">
+                                                                            <option value="" disabled selected>Choose your Work Status</option>
+                                                                            <option value="Not Started">Not Started</option>
+                                                                            <option value="In Progress">In Progress</option>
+                                                                            <option value="Completed">Completed</option>
+                                                                        </select>
+                                                                    </div>
+
+                                                                    <div class="col-xs-14">
+                                                                        <input class="form-control" type="text" id="wtp_backwash_remarks" placeholder="Remarks on work status" id="example-text-input">
+                                                                    </div>
+
+                                                                    <br>
+
+                                                                    <div class="form-group">
+                                                                        <label for="wtp">Chemical House</label>
+                                                                        <select class="form-control col-sm-1" id="wtp_chemical_house">
+                                                                            <option value="" disabled selected>Choose your Work Status</option>
+                                                                            <option value="Not Started">Not Started</option>
+                                                                            <option value="In Progress">In Progress</option>
+                                                                            <option value="Completed">Completed</option>
+                                                                        </select>
+                                                                    </div>
+
+                                                                    <div class="col-xs-14">
+                                                                        <input class="form-control" type="text" id="wtp_chem_remarks" placeholder="Remarks on work status" id="example-text-input">
+                                                                    </div>
+
+                                                                    <br>
+
+                                                                    <div class="form-group">
+                                                                        <label for="wtp">Chlorination House</label>
+                                                                        <select class="form-control col-sm-1" id="wtp_chlorination">
+                                                                            <option value="" disabled selected>Choose your Work Status</option>
+                                                                            <option value="Not Started">Not Started</option>
+                                                                            <option value="In Progress">In Progress</option>
+                                                                            <option value="Completed">Completed</option>
+                                                                        </select>
+                                                                    </div>
+
+                                                                    <div class="col-xs-14">
+                                                                        <input class="form-control" type="text" id="wtp_cholorination_remarks" placeholder="Remarks on work status" id="example-text-input">
+                                                                    </div>
+
+                                                                    <br>
+
+                                                                    <div class="form-group">
+                                                                        <label for="wtp">Clariflocculator</label>
+                                                                        <select class="form-control col-sm-1" id="wtp_clariflocculator">
+                                                                            <option value="" disabled selected>Choose your Work Status</option>
+                                                                            <option value="Not Started">Not Started</option>
+                                                                            <option value="In Progress">In Progress</option>
+                                                                            <option value="Completed">Completed</option>
+                                                                        </select>
+                                                                    </div>
+
+                                                                    <div class="col-xs-14">
+                                                                        <input class="form-control" type="text" id="wtp_clarifloc_remarks" placeholder="Remarks on work status" id="example-text-input">
+                                                                    </div>
+
+                                                                    <br>
+
+                                                                    <div class="form-group">
+                                                                        <label for="wtp">Filter House</label>
+                                                                        <select class="form-control col-sm-1" id="wtp_filter_house">
+                                                                            <option value="" disabled selected>Choose your Work Status</option>
+                                                                            <option value="Not Started">Not Started</option>
+                                                                            <option value="In Progress">In Progress</option>
+                                                                            <option value="Completed">Completed</option>
+                                                                        </select>
+                                                                    </div>
+
+                                                                    <div class="col-xs-14">
+                                                                        <input class="form-control" type="text" id="wtp_filter_house_remarks" placeholder="Remarks on work status" id="example-text-input">
+                                                                    </div>
+
+                                                                    <br>
+
+                                                                    <div class="form-group">
+                                                                        <label for="wtp">Electro Mechanical</label>
+                                                                        <select class="form-control col-sm-1" id="wtp_electromech">
+                                                                            <option value="" disabled selected>Choose your Work Status</option>
+                                                                            <option value="Not Started">Not Started</option>
+                                                                            <option value="In Progress">In Progress</option>
+                                                                            <option value="Completed">Completed</option>
+                                                                        </select>
+                                                                    </div>
+
+                                                                    <div class="col-xs-14">
+                                                                        <input class="form-control" type="text" id="wtp_electromech_remarks" placeholder="Remarks on work status" id="example-text-input">
+                                                                    </div>
+
+                                                                    <br>
+
+                                                                    <div class="form-group">
+                                                                        <label for="wtp">Trial Run</label>
+                                                                        <select class="form-control col-sm-1" id="wtp_trialrun">
+                                                                            <option value="" disabled selected>Choose your Work Status</option>
+                                                                            <option value="Not Started">Not Started</option>
+                                                                            <option value="In Progress">In Progress</option>
+                                                                            <option value="Completed">Completed</option>
+                                                                        </select>
+                                                                    </div>
+
+                                                                    <div class="col-xs-14">
+                                                                        <input class="form-control" type="text" id="wtp_trialrun_remarks" placeholder="Remarks on work status" id="example-text-input">
+                                                                    </div>
+
+                                                                </div>
+
+
+                                                                <div class="sump hide">
+                                                                    <div class="form-group">
+                                                                        <label for="sump">EarthWork Excavation</label>
+                                                                        <select class="form-control col-sm-1" id="sumpEwExcavation">
+                                                                            <option value="" disabled selected>Choose your Work Status</option>
+                                                                            <option value="Not Started">Not Started</option>
+                                                                            <option value="In Progress">In Progress</option>
+                                                                            <option value="Completed">Completed</option>
+                                                                        </select>
+                                                                    </div>
+
+                                                                    <div class="col-xs-14">
+                                                                        <input class="form-control" type="text" id="sumpEwExcavation_remarks" placeholder="Remarks on work status" id="example-text-input">
+                                                                    </div>
+                                                                    <br>
+
+                                                                    <div class="form-group">
+                                                                        <label for="sump">PCC Stage</label>
+                                                                        <select class="form-control col-sm-1" id="sumpPccstage">
+                                                                            <option value="" disabled selected>Choose your Work Status</option>
+                                                                            <option value="Not Started">Not Started</option>
+                                                                            <option value="In Progress">In Progress</option>
+                                                                            <option value="Completed">Completed</option>
+                                                                        </select>
+                                                                    </div>
+
+                                                                    <div class="col-xs-14">
+                                                                        <input class="form-control" type="text" id="sumpPccstage_remarks" placeholder="Remarks on work status" id="example-text-input">
+                                                                    </div>
+
+                                                                    <br>
+
+                                                                    <div class="form-group">
+                                                                        <label for="sump">Raft Stage</label>
+                                                                        <select class="form-control col-sm-1" id="sumpRaftstage">
+                                                                            <option value="" disabled selected>Choose your Work Status</option>
+                                                                            <option value="Not Started">Not Started</option>
+                                                                            <option value="In Progress">In Progress</option>
+                                                                            <option value="Completed">Completed</option>
+                                                                        </select>
+                                                                    </div>
+
+                                                                    <div class="col-xs-14">
+                                                                        <input class="form-control" type="text" id="sumpRaftstage_remarks" placeholder="Remarks on work status" id="example-text-input">
+                                                                    </div>
+
+                                                                    <br>
+
+                                                                    <div class="form-group">
+                                                                        <label for="sump">Sidewall Staging</label>
+                                                                        <select class="form-control col-sm-1" id="sumpSidewallStaging">
+                                                                            <option value="" disabled selected>Choose your Work Status</option>
+                                                                            <option value="Not Started">Not Started</option>
+                                                                            <option value="In Progress">In Progress</option>
+                                                                            <option value="Completed">Completed</option>
+                                                                        </select>
+                                                                    </div>
+
+                                                                    <div class="col-xs-14">
+                                                                        <input class="form-control" type="text" id="sumpSidewallStaging_remarks" placeholder="Remarks on work status" id="example-text-input">
+                                                                    </div>
+
+                                                                    <br>
+
+                                                                    <div class="form-group">
+                                                                        <label for="sump">Top Slab Level</label>
+                                                                        <select class="form-control col-sm-1" id="sumpTopSlabLevel">
+                                                                            <option value="" disabled selected>Choose your Work Status</option>
+                                                                            <option value="Not Started">Not Started</option>
+                                                                            <option value="In Progress">In Progress</option>
+                                                                            <option value="Cmpleted">Completed</option>
+                                                                        </select>
+                                                                    </div>
+
+                                                                    <div class="col-xs-14">
+                                                                        <input class="form-control" type="text" id="sumpTopSlabLevel_remarks" placeholder="Remarks on work status" id="example-text-input">
+                                                                    </div>
+
+                                                                    <br>
+
+                                                                    <div class="form-group">
+                                                                        <label for="sump">Fixing CI Specials</label>
+                                                                        <select class="form-control col-sm-1" id="sumpCiSpecial">
+                                                                            <option value="" disabled selected>Choose your Work Status</option>
+                                                                            <option value="Not Started">Not Started</option>
+                                                                            <option value="In Progress">In Progress</option>
+                                                                            <option value="Completed">Completed</option>
+                                                                        </select>
+                                                                    </div>
+
+                                                                    <div class="col-xs-14">
+                                                                        <input class="form-control" type="text" id="sumpCiSpecial_remarks" placeholder="Remarks on work status" id="example-text-input">
+                                                                    </div>
+
+                                                                    <br>
+
+                                                                    <div class="form-group">
+                                                                        <label for="sump">Finishing Stage</label>
+                                                                        <select class="form-control col-sm-1" id="sumpFinishingStage">
+                                                                            <option value="" disabled selected>Choose your Work Status</option>
+                                                                            <option value="Not Started">Not Started</option>
+                                                                            <option value="In Progress">In Progress</option>
+                                                                            <option value="Completed">Completed</option>
+                                                                        </select>
+                                                                    </div>
+
+                                                                    <div class="col-xs-14">
+                                                                        <input class="form-control" type="text" id="sumpFinishingStage_remarks" placeholder="Remarks on work status" id="example-text-input">
+                                                                    </div>
+
+
+                                                                </div>
+
+                                                                <div class="ohbr hide">
+                                                                    <div class="form-group">
+                                                                        <label for="ohbr">EarthWork Excavation</label>
+                                                                        <select class="form-control col-sm-1" id="ewExcavation">
+                                                                            <option value="" disabled selected>Choose your Work Status</option>
+                                                                            <option value="Not Started">Not Started</option>
+                                                                            <option value="In Progress">In Progress</option>
+                                                                            <option value="Completed">Completed</option>
+                                                                        </select>
+                                                                    </div>
+
+                                                                    <div class="col-xs-14">
+                                                                        <input class="form-control" type="text" id="ewExcavation_remarks" placeholder="Remarks on work status" id="example-text-input">
+                                                                    </div>
+                                                                    <br>
+
+                                                                    <div class="form-group">
+                                                                        <label for="ohbr">PCC Stage</label>
+                                                                        <select class="form-control col-sm-1" id="pccstage">
+                                                                            <option value="" disabled selected>Choose your Work Status</option>
+                                                                            <option value="Not Started">Not Started</option>
+                                                                            <option value="In Progress">In Progress</option>
+                                                                            <option value="Completed">Completed</option>
+                                                                        </select>
+                                                                    </div>
+
+                                                                    <div class="col-xs-14">
+                                                                        <input class="form-control" type="text" id="pccstage_remarks" placeholder="Remarks on work status" id="example-text-input">
+                                                                    </div>
+
+                                                                    <br>
+
+                                                                    <div class="form-group">
+                                                                        <label for="ohbr">Raft Stage</label>
+                                                                        <select class="form-control col-sm-1" id="raftstage">
+                                                                            <option value="" disabled selected>Choose your Work Status</option>
+                                                                            <option value="Not Started">Not Started</option>
+                                                                            <option value="In Progress">In Progress</option>
+                                                                            <option value="Completed">Completed</option>
+                                                                        </select>
+                                                                    </div>
+
+                                                                    <div class="col-xs-14">
+                                                                        <input class="form-control" type="text" id="raftstage_remarks" placeholder="Remarks on work status" id="example-text-input">
+                                                                    </div>
+
+                                                                    <br>
+
+                                                                    <div class="form-group">
+                                                                        <label for="ohbr">GL Stage</label>
+                                                                        <select class="form-control col-sm-1" id="glstage">
+                                                                            <option value="" disabled selected>Choose your Work Status</option>
+                                                                            <option value="Not Started">Not Started</option>
+                                                                            <option value="In Progress">In Progress</option>
+                                                                            <option value="Completed">Completed</option>
+                                                                        </select>
+                                                                    </div>
+
+                                                                    <div class="col-xs-14">
+                                                                        <input class="form-control" type="text" id="glstage_remarks" placeholder="Remarks on work status" id="example-text-input">
+                                                                    </div>
+
+                                                                    <br>
+
+                                                                    <div class="form-group">
+                                                                        <label for="ohbr">Staging Level</label>
+                                                                        <select class="form-control col-sm-1" id="stagingLevel">
+                                                                            <option value="" disabled selected>Choose your Work Status</option>
+                                                                            <option value="Not Started">Not Started</option>
+                                                                            <option value="In Progress">In Progress</option>
+                                                                            <option value="Completed">Completed</option>
+                                                                        </select>
+                                                                    </div>
+
+                                                                    <div class="col-xs-14">
+                                                                        <input class="form-control" type="text" id="stagingLevel_remarks" placeholder="Remarks on work status" id="example-text-input">
+                                                                    </div>
+
+                                                                    <br>
+
+                                                                    <div class="form-group">
+                                                                        <label for="ohbr">Bottom Slab</label>
+                                                                        <select class="form-control col-sm-1" id="bottomSlab">
+                                                                            <option value="" disabled selected>Choose your Work Status</option>
+                                                                            <option value="Not Started">Not Started</option>
+                                                                            <option value="In Progress">In Progress</option>
+                                                                            <option value="Completed">Completed</option>
+                                                                        </select>
+                                                                    </div>
+
+                                                                    <div class="col-xs-14">
+                                                                        <input class="form-control" type="text" id="bottomSlab_remarks" placeholder="Remarks on work status" id="example-text-input">
+                                                                    </div>
+
+                                                                    <br>
+
+                                                                    <div class="form-group">
+                                                                        <label for="ohbr">Sidewall Staging</label>
+                                                                        <select class="form-control col-sm-1" id="sidewallStaging">
+                                                                            <option value="" disabled selected>Choose your Work Status</option>
+                                                                            <option value="Not Started">Not Started</option>
+                                                                            <option value="In Progress">In Progress</option>
+                                                                            <option value="Completed">Completed</option>
+                                                                        </select>
+                                                                    </div>
+
+                                                                    <div class="col-xs-14">
+                                                                        <input class="form-control" type="text" id="sidewallStaging_remarks" placeholder="Remarks on work status" id="example-text-input">
+                                                                    </div>
+
+                                                                    <br>
+
+                                                                    <div class="form-group">
+                                                                        <label for="ohbr">Top Slab Level</label>
+                                                                        <select class="form-control col-sm-1" id="topSlabLevel">
+                                                                            <option value="" disabled selected>Choose your Work Status</option>
+                                                                            <option value="Not Started">Not Started</option>
+                                                                            <option value="In Progress">In Progress</option>
+                                                                            <option value="Completed">Completed</option>
+                                                                        </select>
+                                                                    </div>
+
+                                                                    <div class="col-xs-14">
+                                                                        <input class="form-control" type="text" id="topSlabLevel_remarks" placeholder="Remarks on work status" id="example-text-input">
+                                                                    </div>
+
+                                                                    <br>
+
+                                                                    <div class="form-group">
+                                                                        <label for="ohbr">Fixing CI Specials</label>
+                                                                        <select class="form-control col-sm-1" id="ciSpecial">
+                                                                            <option value="" disabled selected>Choose your Work Status</option>
+                                                                            <option value="Not Started">Not Started</option>
+                                                                            <option value="In Progress">In Progress</option>
+                                                                            <option value="Completed">Completed</option>
+                                                                        </select>
+                                                                    </div>
+
+                                                                    <div class="col-xs-14">
+                                                                        <input class="form-control" type="text" id="ciSpecial_remarks" placeholder="Remarks on work status" id="example-text-input">
+                                                                    </div>
+
+                                                                    <br>
+
+                                                                    <div class="form-group">
+                                                                        <label for="ohbr">Finishing Stage</label>
+                                                                        <select class="form-control col-sm-1" id="finishingStage">
+                                                                            <option value="" disabled selected>Choose your Work Status</option>
+                                                                            <option value="Not Started">Not Started</option>
+                                                                            <option value="In Progress">In Progress</option>
+                                                                            <option value="Completed">Completed</option>
+                                                                        </select>
+                                                                    </div>
+
+                                                                    <div class="col-xs-14">
+                                                                        <input class="form-control" type="text" id="finishingStage_remarks" placeholder="Remarks on work status" id="example-text-input">
+                                                                    </div>
+
+
+                                                                </div>
+
+
+                                                                <div class="fpb hide">
+
+                                                                    <div class="form-group">
+                                                                        <label for="fpb">Foundation Stage</label>
+                                                                        <select class="form-control col-sm-1" id="foundationstage">
+                                                                            <option value="" disabled selected>Choose your Work Status</option>
+                                                                            <option value="Not Started">Not Started</option>
+                                                                            <option value="In Progress">In Progress</option>
+                                                                            <option value="Completed">Completed</option>
+                                                                        </select>
+                                                                    </div>
+
+                                                                    <div class="col-xs-14">
+                                                                        <input class="form-control" type="text" id="foundationstage_remarks" placeholder="Remarks on work status" id="example-text-input">
+                                                                    </div>
+
+                                                                    <br>
+
+                                                                    <div class="form-group">
+                                                                        <label for="fpb">Column Stage</label>
+                                                                        <select class="form-control col-sm-1" id="columnstage">
+                                                                            <option value="" disabled selected>Choose your Work Status</option>
+                                                                            <option value="Not Started">Not Started</option>
+                                                                            <option value="In Progress">In Progress</option>
+                                                                            <option value="Completed">Completed</option>
+                                                                        </select>
+                                                                    </div>
+
+                                                                    <div class="col-xs-14">
+                                                                        <input class="form-control" type="text" id="columnstage_remarks" placeholder="Remarks on work status" id="example-text-input">
+                                                                    </div>
+
+                                                                    <br>
+
+                                                                    <div class="form-group">
+                                                                        <label for="fpb">Slab_level</label>
+                                                                        <select class="form-control col-sm-1" id="slabLevel">
+                                                                            <option value="" disabled selected>Choose your Work Status</option>
+                                                                            <option value="Not Started">Not Started</option>
+                                                                            <option value="In Progress">In Progress</option>
+                                                                            <option value="Completed">Completed</option>
+                                                                        </select>
+                                                                    </div>
+
+                                                                    <div class="col-xs-14">
+                                                                        <input class="form-control" type="text" id="slabLevel_remarks" placeholder="Remarks on work status" id="example-text-input">
+                                                                    </div>
+
+
+                                                                    <br>
+
+                                                                    <div class="form-group">
+                                                                        <label for="fpb">Finishing Stage</label>
+                                                                        <select class="form-control col-sm-1" id="fbFinishingStage">
+                                                                            <option value="" disabled selected>Choose your Work Status</option>
+                                                                            <option value="Not Started">Not Started</option>
+                                                                            <option value="In Progress">In Progress</option>
+                                                                            <option value="Completed">Completed</option>
+                                                                        </select>
+                                                                    </div>
+
+                                                                    <div class="col-xs-14 ">
+                                                                        <input class="form-control " type="text" id="fbFinishingStage_remarks" placeholder="Remarks on work status" id="example-text-input">
+                                                                    </div>
+
+
+                                                                </div>
+                                                            </div>
+
+
+                                                        </div>
+                                                        <input class="btn btn-default center-block" type="submit" value="proceed" name="search" id="proceedphy">    
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>                
+
+                            <div id="accordion" role="tablist" aria-multiselectable="true">
+
+                                <div class="card hide finprogclass">
+                                    <div class="card-header" role="tab" id="headingfive">
+                                        <h4 class="mb-0">
+                                            <a class="collapsed" id="financialprogress" data-toggle="collapse" data-parent="#accordion" href="#collapsefive" aria-expanded="false" aria-controls="collapsefive">
+                                                Enter asset Financial progress
+                                            </a>
+                                        </h4>
+                                    </div>
+                                    <div id="collapsefive" class="collapse" role="tabpanel" aria-labelledby="headingfive">
+                                        <div class="card-block">
+                                            <div class="form-group">
+                                                <label class="col-xs-4 col-form-label" for="exampleInputAmount">Amount Paid</label>
+                                                <div class="input-group">
+                                                    <div class="input-group-addon">Rs</div>
+                                                    <input type="text" class="form-control" id="ipamountPaid" placeholder="Amount">
+                                                    <div class="input-group-addon">.00</div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="example-date-input" class="col-xs-4 col-form-label">Paid Date</label>
+                                                <div class="col-xs-8">
+                                                    <input class="form-control" type="date" value="" id="ippaidDate">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="example-text-input" class="col-xs-4 col-form-label">M-Book No</label>
+                                                <div class="col-xs-8">
+                                                    <input class="form-control" type="text" id="ipmbook"  placeholder="Mbook No" id="example-text-input">
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>                   
+                            <input class="btn btn-default center-block hide submitdetails" type="submit" value="Update" name="search" id="submit_details">  
+
                         </div>
 
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    
-    <script src="./js/jquery.min.js"></script> 
-    <script src="./js/custom.js"></script> 
-    <script src="./js/bootstrap.min.js"></script>
-    <script src="./js/custom/common.js"></script>
-    <script src="./js/custom/camera.js"></script>
-    <script src="./js/custom/assetUpdate.js"></script>
-    
-</body>
+
+
+        <script src="./js/jquery.min.js"></script> 
+        <script src="./js/custom.js"></script> 
+        <script src="./js/bootstrap.min.js"></script>
+        <script src="./js/custom/common.js"></script>
+        <script src="./js/custom/camera.js"></script>
+        <script src="./js/custom/assetUpdate.js"></script>
+
+    </body>
 </html>
