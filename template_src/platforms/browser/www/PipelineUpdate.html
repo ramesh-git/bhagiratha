@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="theme-color" content="#0000FF">
+      <meta name="msapplication-navbutton-color" content="#0000FF">
+      <meta name="apple-mobile-web-app-status-bar-style" content="#0000FF">
+      <meta name="description" content="">
+      <meta name="author" content="">
+      <link rel="stylesheet" type="text/css" href="./css/boot.css"/>
+      <link href="fonts/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+      <link rel="stylesheet" type="text/css" href="./css/style.css"/>
+      <link href="./css/navbar-fixed-top.css" rel="stylesheet">
+   </head>
+   <body>
+      <nav class="navbar navbar-default navbar-fixed-top navbar-md">
+         <div class="container">
+            <div class="navbar-header">
+               <button type="button" class="navbar-toggle sidebar-toggle left-menu-bar-btn"> 
+               <span class="icon-bar">
+               </span> 
+               <span class="icon-bar">
+               </span> 
+               <span class="icon-bar">
+               </span> </button> <a href="allsearch.html" class="transition"> <button type="button" class="navbar-toggle search-btn-onclick"> 
+               <span class="glyphicon glyphicon-search">
+               </span> </button> </a> 
+               <span class="navbar-brand" href="#"><img src="" class="img-responsive logo"/>Mission Bhagiratha
+               </span> 
+               <div class="dropdown pull-right"> </div>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+               <ul class="nav navbar-nav"> </ul>
+            </div>
+         </div>
+      </nav>
+      <div class="sidebar-overlay"></div>
+        <aside id="sidebar" class="sidebar sidebar-default sidebar-fixed-left" role="navigation">
+            <div class="bgimg" >
+            <img src="img/Mission_bhagiratha_logo.png" class="img-responsive left-logo" />           
+            User: User Name 
+            </div>
+            <ul class="nav sidebar-nav">
+
+                <li class="divider"></li>
+                <li class="dropdown">
+                    <a class="ripple-effect dropdown-toggle" href="#" data-toggle="dropdown">
+                        <span class="glyphicon glyphicon-list-alt">
+                        </span>&nbsp; Structures<b class="caret"></b></a> 
+                    <ul class="dropdown-menu ac-act-dropdown-menu">
+                        <li><a href="./AssetUpdate.html" class="transition"><span class="glyphicon glyphicon-list-alt">Update</a></li>
+
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a class="ripple-effect dropdown-toggle" href="#" data-toggle="dropdown">
+                        <span class="glyphicon glyphicon-list-alt">
+                        </span>&nbsp; Pipeline<b class="caret"></b></a> 
+                    <ul class="dropdown-menu ac-act-dropdown-menu">
+                        <li><a href="./PipelineUpdate.html" class="transition"><span class="glyphicon glyphicon-list-alt">Progress</a></li>
+
+                    </ul>
+                </li>
+                
+            </ul>
+        </aside>
+       <div class="container">
+            <div class="row" style="margin-top:15px; padding:5px;">
+
+
+                <!-- Nav tabs --><div class="card">
+			<h4 style="text-align:center">Pipeline Progress</h4>
+                    <!--<ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Pipeline Progress Entry Form</a></li>-->
+<!--                        <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Details</a></li>
+                        <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Progress</a></li>
+                        <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Remarks</a></li>-->
+                    <!--</ul>-->
+                    
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane active" id="selection">
+                            <div id="accordion1" role="tablist" aria-multiselectable="true">
+  
+  <div class="card ">
+    <div class="card-header" role="tab" id="headingThree1">
+      <h4 class="mb-0">
+        <a class="collapsed " id="pipelineloc" data-toggle="collapse" data-parent="#accordion1" href="#collapseThree1" aria-expanded="false" aria-controls="collapseThree">
+          Select pipeline location
+        </a>
+      </h4>
+    </div>
+    <div id="collapseThree1" class="collapse" role="tabpanel" aria-labelledby="headingThree1">
+      <div class="card-block">
+          <br>
+                                      <div class="form-group">
+                                <label for="exampleSelect1">Select District</label>
+                                <select class="form-control col-sm-1" id="district">
+                                    <option value="" disabled selected>Choose your district</option>
+                                </select>
+                            </div>
+            <div class="form-group">
+                                <label for="exampleSelect1">Select Segment</label>
+                                <select class="form-control col-sm-1" id="segment">
+                                    <option value="" disabled selected>Choose your Segment</option>
+                                </select>
+                            </div>
+                         
+                            <div class="form-group">
+                                <label for="netwrktyp">Select Network Type</label>
+                                <select class="form-control col-sm-1" id="netwrktyp">
+                                    <option value="" disabled selected>Choose your Network Type</option>
+                                    <option value="01">Transmission</option>
+                                    <option value="02">Distribution</option>
+                                    
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="type">Select Transmission Type</label>
+                                <select class="form-control col-sm-1" id="type">
+                                    <option value="" disabled selected>Choose your Transmission Type</option>
+                                    <option value="01">Gravity</option>
+                                    <option value="02">Pumping</option>
+                                    
+                                </select>
+                            </div>
+                            <input class="btn btn-default center-block search_asset" type="submit" value="Submit" name="search" id="search_asset"> 
+                               
+                            <!--</button>-->
+         
+                     
+      </div>
+    </div>
+  </div>
+ 
+</div>
+
+<div id="accordion" role="tablist" aria-multiselectable="true">
+  
+  <div class="card hide pipeslist">
+    <div class="card-header" role="tab" id="headingThree10">
+      <h4 class="mb-0">
+        <a class="collapsed " id="pipelinelist" data-toggle="collapse" data-parent="#accordion" href="#collapseThree10" aria-expanded="false" aria-controls="collapseThree">
+          Pipelines based on above selection
+        </a>
+      </h4>
+    </div>
+    <div id="collapseThree10" class="collapse" role="tabpanel" aria-labelledby="headingThree10">
+      <div class="card-block">      
+                            <table class="table table-bordered center-block">
+                                <thead>
+                                <h2><b>Pipeline Details</b></h2>
+                                </thead>
+                                
+                            </table>
+                            
+                            <div class="assets_list">
+                                
+                            </div>
+                            
+                               
+                            <!--</button>-->
+         
+                     
+      </div>
+    </div>
+  </div>
+ 
+</div>
+<div id="accordion" role="tablist" aria-multiselectable="true">
+  
+  <div class="card hide pipedet">
+    <div class="card-header" role="tab" id="headingTwo1">
+      <h4 class="mb-0">
+        <a class="collapsed" id="pipedetails" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo1" aria-expanded="false" aria-controls="collapseTwo">
+          Basic Details of selected pipeline
+        </a>
+      </h4>
+    </div>
+    <div id="collapseTwo1" class="collapse" role="tabpanel" aria-labelledby="headingTwo1">
+      <div class="card-block">
+         <div class="form-group">
+                                <label for="disabledTextInput">Target Date</label>
+                                <input class="form-control" type="text" id="targetdate" placeholder="Target Date" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="disabledTextInput">Agreement Details</label>
+                                <input class="form-control" type="text" id="agmtNumber" placeholder="Agreement Number" readonly>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="disabledTextInput">Agent name</label>
+                                <input class="form-control" type="text" id="agentName" placeholder="Agent name" readonly>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="disabledTextInput">Estimation Cost(In lakhs)</label>
+                                <input class="form-control" type="text" id="estCost" placeholder="Estimation Cost" readonly>
+                            </div>
+                           
+                            <div class="form-group">
+                                <label for="disabledTextInput">Contract Amount(In lakhs)</label>
+                                <input class="form-control" id="contractAmt" type="text" placeholder="Contract Amount(In lakhs)" readonly>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="exampleSelect1">Select Strech</label>
+                                <select class="form-control col-sm-1" id="fromTo">
+                                    <option value="" disabled selected>Choose Strech</option>
+                                </select>
+                            </div>
+          <input class="btn btn-default center-block" type="submit" value="proceed" name="search" id="proceed">
+      </div>
+    </div>
+  </div>
+ 
+</div>
+                            
+<div id="accordion" role="tablist" aria-multiselectable="true">
+  
+  <div class="card hide strechdet">
+    <div class="card-header" role="tab" id="headingTwo">
+      <h4 class="mb-0">
+        <a class="collapsed" id="strechdetails" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+          Selected Stretch Details
+        </a>
+      </h4>
+    </div>
+    <div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo">
+      <div class="card-block">
+         <div class="form-group">
+                                <label for="disabledTextInput">Class</label>
+                                <input class="form-control" id="class" type="text" placeholder="Class" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="disabledTextInput">Dia</label>
+                                <input class="form-control" type="text" id="dia" placeholder="Dia" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="disabledTextInput">Type</label>
+                                <input class="form-control" type="text" id="strechtype" placeholder="Type" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="disabledTextInput">Estimation Cost</label>
+                                <input class="form-control" type="text" id="strechEstCost" placeholder="Estimation Cost" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="disabledTextInput">Total Length</label>
+                                <input class="form-control" type="text" id="strechLength" placeholder="Total Length" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="disabledTextInput">Procured</label>
+                                <input class="form-control" type="text" id="procured" placeholder="Procured" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="disabledTextInput">Laid</label>
+                                <input class="form-control" type="text" id="laid" placeholder="Laid" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="disabledTextInput">Laid Length through agl</label>
+                                <input class="form-control" type="text" id="aglLength" placeholder="Laid Length through agl" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="disabledTextInput">Amount Paid</label>
+                                <input class="form-control" type="text" id="strechAmtPaid" placeholder="Amount Paid" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="disabledTextInput">Paid Date</label>
+                                <input class="form-control" type="text" id="strechPaidDate" placeholder="Paid Date" readonly>
+                            </div>
+          <input class="btn btn-default center-block" type="submit" value="proceed" name="search" id="proceedstr">
+      </div>
+    </div>
+  </div>
+ 
+</div>
+
+<div id="accordion" role="tablist" aria-multiselectable="true">
+  
+  <div class="card hide strechprog">
+    <div class="card-header" role="tab" id="headingTwo9">
+      <h4 class="mb-0">
+        <a class="collapsed" id="strechprogress" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo9" aria-expanded="false" aria-controls="collapseTwo">
+          Enter Strech Progress Details
+        </a>
+      </h4>
+    </div>
+    <div id="collapseTwo9" class="collapse" role="tabpanel" aria-labelledby="headingTwo9">
+      <div class="card-block">
+<!--                                         <div>
+                                <h2 style  align ="center" >Strech Progress Details </h2>
+                                </div>-->
+                            
+                              <div class="form-group row">
+                                <label for="example-text-input" class="col-xs-4 col-form-label">Procured</label>
+                                <div class="col-xs-8">
+                                    <input class="form-control" type="number" id="ipproc" id="example-text-input">
+                                </div>
+                               
+                            </div>
+                            <div class="form-group row">
+                                <label for="example-text-input" class="col-xs-4 col-form-label">Laid</label>
+                                <div class="col-xs-8">
+                                    <input class="form-control" type="number" id="iplaid" id="example-text-input">
+                                </div>
+                               
+                            </div>
+                            <div class="form-group row">
+                                <label for="example-text-input" class="col-xs-4 col-form-label">Laid Length through agl</label>
+                                <div class="col-xs-8">
+                                    <input class="form-control" type="number" id="ipagl" id="example-text-input">
+                                </div>
+                               
+                            </div>
+                            
+                           
+                            <div class="form-group">
+                                <label class="col-xs-4 col-form-label" for="exampleInputAmount"> Amount Paid</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">Rs</div>
+                                    <input type="text" class="form-control" id="strechIpPaidAmt" placeholder="Amount">
+                                    <div class="input-group-addon">.00</div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="example-date-input" class="col-xs-4 col-form-label">Paid Date</label>
+                                <div class="col-xs-8">
+                                    <input class="form-control" type="date" id="strechipPaidDate" >
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="example-text-input" class="col-xs-4 col-form-label">M-Book No</label>
+                                <div class="col-xs-8">
+                                    <input class="form-control" type="text" id="ipmbook">
+                                </div>
+                            </div>
+        <input class="btn btn-default center-block" type="submit" value="proceed" name="search" id="proceedstrech">
+      </div>
+    </div>
+  </div>
+ 
+</div>
+                            
+                            <div id="accordion2" role="tablist" aria-multiselectable="true">
+  
+  <div class="card hide permission">
+    <div class="card-header" role="tab" id="headingThree2">
+      <h4 class="mb-0">
+        <a class="collapsed" id="permissiondet" data-toggle="collapse" data-parent="#accordion2" href="#collapseThree2" aria-expanded="false" aria-controls="collapseThree">
+          Permission Details
+        </a>
+      </h4>
+    </div>
+    <div id="collapseThree2" class="collapse" role="tabpanel" aria-labelledby="headingThree2">
+      <div class="card-block">
+          <br>
+                            <div class="form-group">
+                                <label for="rbStatus">Select R&B Status</label>
+                                <select class="form-control col-sm-1" id="rbStatus">
+                                    <option value="0"  selected>Choose your Status</option>
+                                    <option value="0" >Not Obtained</option>
+                                    <option value="1">Obtained</option>
+                                    
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="hwStatus">Select Highway Status</label>
+                                <select class="form-control col-sm-1" id="hwStatus">
+                                    <option value="0"  selected>Choose your Status</option>
+                                    <option value="0">Not Obtained</option>
+                                    <option value="1">Obtained</option>
+                                    
+                                </select>
+                            </div>
+          
+                            <div class="form-group">
+                                <label for="prStatus">Select PR Status</label>
+                                <select class="form-control col-sm-1" id="prStatus">
+                                    <option value="0"  selected>Choose your Status</option>
+                                    <option value="0">Not Obtained</option>
+                                    <option value="1">Obtained</option>
+                                    
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="riverStatus">Select River Crossing Status</label>
+                                <select class="form-control col-sm-1" id="riverStatus">
+                                    <option value="0"  selected>Choose your Status</option>
+                                    <option value="0">Not Obtained</option>
+                                    <option value="1">Obtained</option>
+                                    
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="forestStatus">Select Forest Status</label>
+                                <select class="form-control col-sm-1" id="forestStatus">
+                                    <option value="0"  selected>Choose your Status</option>
+                                    <option value="0">Not Obtained</option>
+                                    <option value="1">Obtained</option>
+                                    
+                                </select>
+                            </div>
+                            <input class="btn btn-default center-block" type="submit" value="proceed" name="search" id="proceedpermission">
+          
+      </div>
+    </div>
+  </div>
+ 
+</div>
+                            
+                            <div id="accordion4" role="tablist" aria-multiselectable="true">
+  
+  <div class="card hide crossing">
+    <div class="card-header" role="tab" id="headingThree4">
+      <h4 class="mb-0">
+        <a class="collapsed" id="crossingdet" data-toggle="collapse" data-parent="#accordion4" href="#collapseThree4" aria-expanded="false" aria-controls="collapseThree">
+          Crossing Details Entry
+        </a>
+      </h4>
+    </div>
+    <div id="collapseThree4" class="collapse" role="tabpanel" aria-labelledby="headingThree4">
+      <div class="card-block">
+          <br>
+                            <form class="form-inline">
+                                <div class="form-group">
+                                <label for="crossingtype">Select Crossing Type</label>
+                                <select class="form-control col-sm-1" id="crossingtype">
+                                    <option value="0"  selected>Choose your Crossing Type</option>
+                                    <option value="1">R&B</option>
+                                    <option value="2">Highway</option>
+                                    <option value="3">PR</option>
+                                    <option value="4">River Crossing</option>
+                                    <option value="5">Forest</option>
+                                </select>
+                                </div>
+                                
+                                <div class="form-group">
+                                <label for="prmsnreq">Select Permission Status</label>
+                                <select class="form-control col-sm-1" id="prmsnreq">
+                                    <option value="0"  selected>Choose your Permission Status</option>
+                                    <option value="1">Required</option>
+                                    <option value="0">Not Required</option>
+                                </select>
+                                </div>
+                                
+                                <div class="form-group hide prmsnobtained">
+                                <label for="prmsnobt">Select Permission Obtained Status</label>
+                                <select value = "0" class="form-control col-sm-1" id="prmsnobt">
+                                    <option value="0"  selected>Choose your Obtained Status</option>
+                                    <option value="0">Not Obtained</option>
+                                    <option value="1">Obtained</option>
+                                </select>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="CrossinglatitudeAtStart" placeholder="Latitude Start Point" readonly>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="CrossinglongitudeAtStart" placeholder="Longitude Start Point" readonly>
+                                </div>
+                                <button type="button" id="crossinggpsStart" style="align-items: center" class="btn btn-primary"><i class="fa fa-map-marker" style="font-size:28px;color:red"></i></button>
+                                 <div class="form-group">
+                                    <input type="text" class="form-control" id="CrossinglatitudeAtEnd" placeholder="Latitude End Point" readonly>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="CrossinglongitudeAtEnd" placeholder="Longitude End Point" readonly>
+                                </div>
+                                <button type="button" id="CrossinggpsEnd" style="align-items: center" class="btn btn-primary"><i class="fa fa-map-marker" style="font-size:28px;color:red"></i></button>
+                                <!--<button type="button" id="img" style="align-items: center" class="btn btn-primary"><i class="fa fa-camera" style="font-size:28px;color:black"></i></button>-->
+<!--                                <span class="btn btn-default btn-file">
+                                    <i class="fa fa-camera" style="font-size:28px;color:black"></i>Image <input type="file" id="CrossingImage" name="CrossingImage" capture="camera" accept="image/x-png, image/gif, image/jpeg" data-filetype=".png,.gif,.jpeg,.jpg,.JPEG,.JPG" data-filesize="5" required="required">
+                                    <input type="hidden" id="CrossingImageData" name="CrossingImageData">
+                                </span>-->
+                                <button id="crossingentryphoto" onclick="capturePhotoWithData(this);">Capture Photo</button> <br>
+                                <div class="form-group row">
+                                <label for="example-text-input" class="col-xs-2 col-form-label">Remarks</label>
+                                <div class="col-xs-10">
+                                    <input class="form-control" type="text" value="" id="crossing_remarks" >
+                                </div>
+                                </div> 
+                                <input class="btn btn-default center-block" type="button" value="ADD" name="search" id="add_crossing">
+                            </form>
+                            
+          
+      </div>
+    </div>
+  </div>
+ 
+</div>
+
+                            <div id="accordion4" role="tablist" aria-multiselectable="true">
+  
+  <div class="card hide crossingupdate">
+    <div class="card-header" role="tab" id="headingThree44">
+      <h4 class="mb-0">
+        <a class="collapsed" id="crossingupdatedet" data-toggle="collapse" data-parent="#accordion4" href="#collapseThree44" aria-expanded="false" aria-controls="collapseThree">
+          Crossing Details Update
+        </a>
+      </h4>
+    </div>
+    <div id="collapseThree44" class="collapse" role="tabpanel" aria-labelledby="headingThree44">
+      <div class="card-block">
+          <br>
+                            <form class="form-inline">
+                                <div class="form-group">
+                                <label for="existCrossingType">Select Crossing Type</label>
+                                <select class="form-control col-sm-1" id="existCrossingType">
+                                    <option value="0"  selected>Choose your Crossing Type</option>
+                                </select>
+                                </div>
+                                
+                                <div class="form-group">
+                                <label for="existprmsnreq">Select Permission Status</label>
+                                <select class="form-control col-sm-1" id="existprmsnreq">
+                                    <option value="0"  selected>Choose your Permission Status</option>
+                                    <option value="1">Required</option>
+                                    <option value="0">Not Required</option>
+                                </select>
+                                </div>
+                                
+                                <div class="form-group hide prmsnobtained">
+                                <label for="existprmsnobt">Select Permission Obtained Status</label>
+                                <select value = "0" class="form-control col-sm-1" id="existprmsnobt">
+                                    <option value="0"  selected>Choose your Obtained Status</option>
+                                    <option value="0">Not Obtained</option>
+                                    <option value="1">Obtained</option>
+                                </select>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="existCrossinglatitudeAtStart" placeholder="Latitude Start Point" readonly>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="existCrossinglongitudeAtStart" placeholder="Longitude Start Point" readonly>
+                                </div>
+                                <button type="button" id="existcrossinggpsStart" style="align-items: center" class="btn btn-primary"><i class="fa fa-map-marker" style="font-size:28px;color:red"></i></button>
+                                 <div class="form-group">
+                                    <input type="text" class="form-control" id="existCrossinglatitudeAtEnd" placeholder="Latitude End Point" readonly>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="existCrossinglongitudeAtEnd" placeholder="Longitude End Point" readonly>
+                                </div>
+                                <button type="button" id="existCrossinggpsEnd" style="align-items: center" class="btn btn-primary"><i class="fa fa-map-marker" style="font-size:28px;color:red"></i></button>
+                                <!--<button type="button" id="img" style="align-items: center" class="btn btn-primary"><i class="fa fa-camera" style="font-size:28px;color:black"></i></button>-->
+<!--                                <span class="btn btn-default btn-file">
+                                    <i class="fa fa-camera" style="font-size:28px;color:black"></i>Image <input type="file" id="existCrossingImage" name="CrossingImage" capture="camera" accept="image/x-png, image/gif, image/jpeg" data-filetype=".png,.gif,.jpeg,.jpg,.JPEG,.JPG" data-filesize="5" required="required">
+                                    <input type="hidden" id="existCrossingImageData" name="existCrossing ">
+                                </span>-->
+                                <button id="crossingupdatephoto" onclick="capturePhotoWithData(this);">Capture Photo</button> <br>
+                                <div class="form-group row">
+                                <label for="example-text-input" class="col-xs-2 col-form-label">Remarks</label>
+                                <div class="col-xs-10">
+                                    <input class="form-control" type="text" value="" id="existcrossing_remarks" >
+                                </div>
+                                </div> 
+                                <input class="btn btn-default center-block" type="button" value="ADD" name="search" id="exist_add_crossing">
+                            </form>
+                            
+          
+      </div>
+    </div>
+  </div>
+ 
+</div>
+                            
+ <div id="accordion5" role="tablist" aria-multiselectable="true">
+  
+  <div class="card hide prevprogress">
+    <div class="card-header" role="tab" id="headingThree5">
+      <h4 class="mb-0">
+        <a class="collapsed" id="prevprogressdet" data-toggle="collapse" data-parent="#accordion5" href="#collapseThree5" aria-expanded="false" aria-controls="collapseThree">
+          Previous Strech Progress Details
+        </a>
+      </h4>
+    </div>
+    <div id="collapseThree5" class="collapse" role="tabpanel" aria-labelledby="headingThree5">
+      <div class="card-block">
+          <br>
+                            <form class="form-inline">
+                                
+                                <div class="form-group">
+                                <label for="progressid">Select Progress</label>
+                                <select class="form-control col-sm-1" id="progressid">
+                                    <option value="0"  selected>Choose your Progress to update</option>
+                                </select>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="progresslatitudeAtStart" placeholder="Latitude Start Point" readonly>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="progresslongitudeAtStart" placeholder="Longitude Start Point" readonly>
+                                </div>
+                                <button type="button" id="progressgpsStart" style="align-items: center" class="btn btn-primary"><i class="fa fa-map-marker" style="font-size:28px;color:red"></i></button>
+                                 <div class="form-group">
+                                    <input type="text" class="form-control" id="progresslatitudeAtEnd" placeholder="Latitude End Point" readonly>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="progresslongitudeAtEnd" placeholder="Longitude End Point" readonly>
+                                </div>
+                                <button type="button" id="progressgpsEnd" style="align-items: center" class="btn btn-primary"><i class="fa fa-map-marker" style="font-size:28px;color:red"></i></button>
+                                <!--<button type="button" id="img" style="align-items: center" class="btn btn-primary"><i class="fa fa-camera" style="font-size:28px;color:black"></i></button>-->
+<!--                                <span class="btn btn-default btn-file">
+                                    <i class="fa fa-camera" style="font-size:28px;color:black"></i>Image <input type="file" id="CrossingImage" name="CrossingImage" accept="image/x-png, image/gif, image/jpeg" data-filetype=".png,.gif,.jpeg,.jpg,.JPEG,.JPG" data-filesize="5" required="required">
+                                    <input type="hidden" id="CrossingImageData" name="CrossingImageData">
+                                </span>-->
+                                <div class="form-group row">
+                                <label for="example-text-input" class="col-xs-2 col-form-label">Reasons</label>
+                                <div class="col-xs-10">
+                                    <input class="form-control" type="text" value="" id="modification_reasons" >
+                                </div>
+                                </div> 
+                                <input class="btn btn-default center-block" type="button" value="ADD" name="search" id="add_modification">
+                            </form>
+                            
+          
+      </div>
+    </div>
+  </div>
+ 
+</div>
+                            
+                            <div id="accordion" role="tablist" aria-multiselectable="true">
+  
+  <div class="card hide valveentry">
+    <div class="card-header" role="tab" id="headingThree">
+      <h4 class="mb-0">
+        <a class="collapsed" id="valveentrydet" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+          Valve Entry
+        </a>
+      </h4>
+    </div>
+    <div id="collapseThree" class="collapse" role="tabpanel" aria-labelledby="headingThree">
+      <div class="card-block">
+          <br>
+          <div class="form-group row">
+                                <label for="example-text-input" class="col-xs-4 col-form-label">Valve Type</label>
+                                <div class="col-xs-8">
+                                    <input class="form-control" type="text" value="" id="valveType" placeholder="Enter Type of valve">
+                                    
+                                </div>
+                               
+                            </div>
+                            <div class="form-group row">
+                                <label for="example-text-input" class="col-xs-4 col-form-label">Dia</label>
+                                <div class="col-xs-8">
+                                    <input class="form-control" type="text" value="" id="valveDia" placeholder="Dia in mm">
+                                </div>
+                               
+                            </div>
+                            <div class="form-group row">
+                                <label for="example-text-input" class="col-xs-4 col-form-label">Class</label>
+                                <div class="col-xs-8">
+                                    <input class="form-control" type="text" value="" id="valvePr" placeholder="Pressure in kg/cm2">
+                                </div>
+                               
+                            </div>
+                            <div class="form-group row">
+                                <label for="example-text-input" class="col-xs-4 col-form-label">Estimation Cost</label>
+                                <div class="col-xs-8">
+                                    <input class="form-control" type="text" value="" id="valveEstcost" placeholder="Enter Amount in Lakhs">
+                                </div>
+                               
+                            </div>
+                            <div class="form-group row">
+                                <label for="example-text-input" class="col-xs-4 col-form-label">Contract Amount</label>
+                                <div class="col-xs-8">
+                                    <input class="form-control" type="text" value="" id="valveContracAmt" placeholder="Enter Amount in Lakhs">
+                                </div>
+                               
+                            </div>
+                            <div class="form-group">
+                                <label class="col-xs-4 col-form-label" for="valveAmtPaid"> Amount Paid</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">Rs</div>
+                                    <input type="text" class="form-control" id="valveAmtPaid" placeholder="Amount" placeholder="Enter Amount in Lakhs">
+                                    <div class="input-group-addon">.00</div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="example-date-input" class="col-xs-4 col-form-label">Paid Date</label>
+                                <div class="col-xs-8">
+                                    <input class="form-control" type="date" value="" id="valvePaidDate">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="example-text-input" class="col-xs-4 col-form-label">M-Book No</label>
+                                <div class="col-xs-8">
+                                    <input class="form-control" type="text" value="" id="valveMbook" placeholder="M-Book No">
+                                </div>
+                             
+                            </div>
+                            <div class="form-group">
+                                <label for="valveStatus" class="required">Select Valve Status</label>
+                                <select class="form-control col-sm-1" id="valveStatus" required="required">
+                                    <option value="00"  selected>Choose your Valve Status</option>
+                                    <option value="01">Fitted</option>
+                                    <option value="02">Procured</option>
+                                    
+                                </select>
+                            </div>
+                            <button type="button" id="valvegpsentry"  style="align-items: center" class="btn btn-primary">
+                                <i class="fa fa-map-marker" style="font-size:28px;color:red"></i>
+                            </button>
+                                <div class="form-group" required="required" >
+                                    <input type="text" class="form-control required" id="valvelatitude" placeholder="Latitude" readonly>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="valvelongitude" placeholder="Longitude" readonly>
+                                </div>
+<!--                                <span class="btn btn-default btn-file">
+                                    <i class="fa fa-camera" style="font-size:28px;color:black"></i>Image <input type="file" capture="camera" id="valveEntryImage" name="valveEntryImage" accept="image/x-png, image/gif, image/jpeg" data-filetype=".png,.gif,.jpeg,.jpg,.JPEG,.JPG" data-filesize="5" required="required">
+                                    <input type="hidden" id="valveEntryImageData" name="valveEntryImageData">
+                                </span>-->
+                                <button id="valveentryphoto" onclick="capturePhotoWithData(this);">Capture Photo</button> <br>
+                                <div class="form-group row">
+                                <label for="valveentryremarks" class="col-xs-2 col-form-label">Remarks</label>
+                                <div class="col-xs-10">
+                                    <input class="form-control" type="text" value="" id="valveentryremarks">
+                                </div>
+                                </div>  
+                            <input class="btn btn-default center-block" type="button" value="ADD" name="search" id="valve_entry">
+         
+                     
+      </div>
+    </div>
+  </div>
+ 
+</div>
+                            
+                            <div id="accordion1" role="tablist" aria-multiselectable="true">
+  
+  <div class="card hide valveupdate">
+    <div class="card-header" role="tab" id="headingThree12">
+      <h4 class="mb-0">
+        <a class="collapsed" id="valveupdatedet" data-toggle="collapse" data-parent="#accordion1" href="#collapseThree12" aria-expanded="false" aria-controls="collapseThree">
+          Valve Update
+        </a>
+      </h4>
+    </div>
+    <div id="collapseThree12" class="collapse" role="tabpanel" aria-labelledby="headingThree12">
+      <div class="card-block">
+          <br>
+            <div class="form-group">
+                                <label for="existValveType">Select Valve</label>
+                                <select class="form-control col-sm-1" id="existValveType">
+                                    <option value="0"  selected>Choose your Valve</option>
+                                </select>
+            </div>
+                            <div class="form-group">
+                                <label for="disabledTextInput">Dia</label>
+                                <input class="form-control" type="text" id="existValvedia" placeholder="Dia in mm" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="disabledTextInput">Class</label>
+                                <input class="form-control" type="text" id="existValvePr" placeholder="Pressure in kg/cm2" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="disabledTextInput">Estimation Cost(in Lakhs)</label>
+                                <input class="form-control" type="text" id="existValveEstCost" placeholder="0.00" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="disabledTextInput">Contract Amount(in Lakhs)</label>
+                                <input class="form-control" type="text" id="existValveContractAmt" placeholder="0.00" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-xs-4 col-form-label" for="existvalveAmtPaid">Amount Paid</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">Rs</div>
+                                    <input type="text" class="form-control" id="existvalveAmtPaid" placeholder="Amount" placeholder="Enter Amount in Lakhs">
+                                    <div class="input-group-addon">.00</div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="existvalvePaidDate" class="col-xs-4 col-form-label">Paid Date</label>
+                                <div class="col-xs-8">
+                                    <input class="form-control" type="date" value="" id="existvalvePaidDate">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="existvalveMbook" class="col-xs-4 col-form-label">M-Book No</label>
+                                <div class="col-xs-8">
+                                    <input class="form-control" type="text" value="" id="existvalveMbook" placeholder="M-Book No">
+                                </div>
+                             
+                            </div>
+                            <div class="form-group">
+                                <label for="existvalveStatus">Select Valve Status</label>
+                                <select class="form-control col-sm-1" id="existvalveStatus">
+                                    <option value="00"  selected>Choose your Valve Status</option>
+                                    <option value="01">Fitted</option>
+                                    <option value="02">Procured</option>
+                                    
+                                </select>
+                            </div>
+                            <button type="button" id="valvegps" value="valvegps" style="align-items: center" class="btn btn-primary">
+                                <i class="fa fa-map-marker" style="font-size:28px;color:red"></i>
+                            </button>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="existvalvelatitude" placeholder="Latitude" readonly>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="existvalvelongitude" placeholder="Longitude" readonly>
+                                </div>
+<!--                                <span class="btn btn-default btn-file">
+                                    <i class="fa fa-camera" style="font-size:28px;color:black"></i>Image <input type="file" capture="camera" id="valveUpdateImage" name="valveUpdateImage" accept="image/x-png, image/gif, image/jpeg" data-filetype=".png,.gif,.jpeg,.jpg,.JPEG,.JPG" data-filesize="5" required="required">
+                                    <input type="hidden" id="valveUpdateImageData" name="valveUpdateImageData">
+                                </span>-->
+                                <button id="valveUpdatephoto" onclick="capturePhotoWithData(this);">Capture Photo</button> <br>
+                                <div class="form-group row">
+                                <label for="valveupdateremarks" class="col-xs-2 col-form-label">Remarks</label>
+                                <div class="col-xs-10">
+                                    <input class="form-control" type="text" value="" id="valveupdateremarks">
+                                </div>
+                                </div>  
+                            <input class="btn btn-default center-block" type="button" value="ADD" name="search" id="valve_update">  
+                               
+                            </button>
+         
+                     
+      </div>
+    </div>
+  </div>
+ 
+</div>
+                            
+                            <div id="accordion1" role="tablist" aria-multiselectable="true">
+  
+  <div class="card hide phyprogress">
+    <div class="card-header" role="tab" id="headingThree11">
+      <h4 class="mb-0">
+        <a class="collapsed" id="phyprogressdet" data-toggle="collapse" data-parent="#accordion1" href="#collapseThree11" aria-expanded="false" aria-controls="collapseThree">
+          Strech Physical progress
+        </a>
+      </h4>
+    </div>
+    <div id="collapseThree11" class="collapse" role="tabpanel" aria-labelledby="headingThree11">
+      <div class="card-block">
+          <br>
+    <form class="form-inline">
+                                
+                                <div class="form-group">
+                                <label for="gpsupdate">Select Junction to update</label>
+                                <select class="form-control col-sm-1" id="gpsupdate">
+                                    <option value=""  selected>Choose your Junction</option>
+                                    <option value="start">from Junction</option>
+                                    <option value="end">To Junction</option>
+                                    
+                                </select>
+                                </div>
+                                
+                                <div class="form-group hide start" id="start">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="latitudeAtStart" placeholder="Latitude Start Point" readonly>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="longitudeAtStart" placeholder="Longitude Start Point" readonly>
+                                </div>
+                                <button type="button" id="gpsStart" style="align-items: center" class="btn btn-primary gpsStart"><i class="fa fa-map-marker" style="font-size:28px;color:red"></i></button>
+                                </div>
+                                
+                                <div class="form-group hide end" id="end">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="latitudeAtEnd" placeholder="Latitude End Point" readonly>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="longitudeAtEnd" placeholder="Longitude End Point" readonly>
+                                </div>
+                                <button type="button" id="gpsEnd" style="align-items: center" class="btn btn-primary gpsEnd"><i class="fa fa-map-marker" style="font-size:28px;color:red"></i></button>
+                                </div>
+                                <!--<button type="button" id="img" style="align-items: center" class="btn btn-primary"><i class="fa fa-camera" style="font-size:28px;color:black"></i></button>-->
+<!--                                <span class="btn btn-default btn-file">
+                                    <i class="fa fa-camera" style="font-size:28px;color:black"></i>Image <input type="file" capture="camera" id="assetImage" data-filesize="5" name="assetImage" accept="image/x-png, image/gif, image/jpeg" data-filetype=".png,.gif,.jpeg,.jpg,.JPEG,.JPG">
+                                    <input type="hidden" id="assetImageData" name="assetImageData">
+                                </span>-->
+                                <button id="phyprogressphoto" onclick="capturePhotoWithData(this);">Capture Photo</button> <br>
+                            </form>
+                           
+                            <div class="form-group row">
+                                <label for="example-text-input" class="col-xs-2 col-form-label">Remarks</label>
+                                <div class="col-xs-10">
+                                    <input class="form-control" type="text" value="" id="remarks">
+                                </div>
+                            </div>   
+                            
+         
+                     
+      </div>
+    </div>
+  </div>
+ 
+</div>
+                            
+                        </div>
+
+<!--                        <div role="tabpanel" class="tab-pane" id="profile">
+                        </div>-->
+                        <!--<div role="tabpanel" class="tab-pane" id="messages">-->
+<!--                            <div class="form-group row">
+                                <label for="example-text-input" class="col-xs-4 col-form-label">M-Book No</label>
+                                <div class="col-xs-8">
+                                    <input class="form-control" type="text" id="ipmbook">
+                                </div>-->
+<!--                                <div>
+                                    <br>
+                                    <br>
+                                <h2 style  align ="center" > Pipeline Valve Progress </h2>
+                                </div>-->
+                            <!--</div>-->
+<input class="btn btn-default center-block hide finalsubmit" type="submit" value="Update" name="search" id="submit_details">
+
+                          <input class="btn btn-default center-block hide" type="submit" value="proceed" name="search" id="work_sub">  
+                        </div>
+<!--                        <div role="tabpanel" class="tab-pane" id="settings">
+                        </div>-->
+                    </div>
+                </div>
+            </div>
+       </div>
+      </div>
+      <script src="./js/jquery.min.js"></script> 
+      <script src="./js/custom.js"></script> 
+      <script src="./js/bootstrap.min.js"></script>
+      <script src="./js/custom/common.js"></script>
+      <script src="./js/custom/camera.js"></script>
+      <script src="./js/custom/PipelineUpdate.js"></script>
+   </body>
+</html>
